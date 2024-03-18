@@ -6,6 +6,7 @@
 
 html {   
     height: 100%;
+    cursor: grab;
 }
 
 body {
@@ -14,6 +15,7 @@ body {
     font-family: "Wix Madefor Display", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    height: 100%;
 }
 
 .side-bar {
@@ -84,14 +86,7 @@ body {
     border-radius: 0px;
     padding: 0;
     font-size: 30px;
-}
-
-.open-button{
-    width: 60px;
-    height:60px;
-    border-radius: 0px;
-    padding: 0;
-    font-size: 30px;
+    float: left;
 }
 
 .button:hover{
@@ -159,6 +154,73 @@ body {
     width: 75%;
     height: 100%;
     margin: 0 auto;
-    background-color: #cecabd0c;
+    padding: 0%;
+    background-color: rgba(0, 0, 0, 0.05);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.v-padding-block{
+    padding: 15pt;
+}
+
+.page-topper{
+    display: block;
+    width: 100%;
+    height: calc(min(min-content, 100px));
+    background-color: #a03ae4;
+    padding: 5pt;
+    color: white;
+    top: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+} 
+
+p {
+    padding: 10pt;
+    background: rgba(253, 232, 255, 0.575);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.t-center{
+    text-align: center;
+}
+
+.buttons-block{
+    display: block;
+    width: 100%;
+}
+
+.mt{
+    margin-top: 10px;
+}
+
+table td {
+    border: solid 1px rgba(0, 0, 0, 0.3);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.astar-demo{
+    width: 50%;
+    margin: auto;
+}
+
+.astar-demo table{
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.astar-demo table td {
+    text-align: center;
+    background-color: #c0c0c07c;
+}
+
+.astar-demo table td:hover {
+    background-color: #b7b1b6a8;
+    transition: 100ms ease-out;
 }
