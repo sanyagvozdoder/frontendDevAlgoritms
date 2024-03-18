@@ -1,3 +1,30 @@
 *{
     box-sizing: border-box;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap');
+
+body {
+    margin: 0;
+    background-color: #e7e6e3;
+    font-family: "Wix Madefor Display", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.button {
+    display: block;
+    background-color: #9d4bd3;
+    border-radius: 7px;
+    padding: 10px 20px;
+    font-size: 14pt;
+    color: white;
+}
+
+.side-bar {
+
+}
+
+.container {
+
+}
