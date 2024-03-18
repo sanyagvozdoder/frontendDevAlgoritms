@@ -2,12 +2,6 @@
     box-sizing: border-box;
 }
 
-.image-div img{
-    width:60px;
-    border-radius: 10px;
-    position: absolute;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap');
 
 html {   
@@ -20,8 +14,18 @@ body {
     font-family: "Wix Madefor Display", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    height: 100%;
 }
+
+.side-bar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    background-color:#8c35c5;
+    padding-top: 60px;
+    transition: 1s;
+  }
 
 .button {
     display: inline-block;
