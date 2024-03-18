@@ -28,17 +28,18 @@ body {
     transition: 0.5s;
 }
 
-.side-bar button{
+.side-bar a{
     display:block;
     padding: 10px 10px 10px 50px;
     font-size: 18px;
     color: #C0C0C0;
     border: none;
-    background-color: #8c35c5;
+    background-color: transparent;
     text-wrap: nowrap;
+    text-decoration: none;
 }
 
-.side-bar button:hover{
+.side-bar a:hover{
     color: #fff;
 }
 
@@ -48,6 +49,15 @@ body {
     right: 25px;
     font-size: 40px;
     margin-left: 50px;
+    background-color: transparent;
+    display:block;
+    border: none;
+    color: #C0C0C0;
+    cursor: pointer;
+}
+
+.side-bar button.close-button:hover{
+    color: #fff;
 }
 
 
