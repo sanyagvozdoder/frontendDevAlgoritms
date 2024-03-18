@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+.image-div img{
+    width:60px;
+    border-radius: 10px;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap');
 
 body {
