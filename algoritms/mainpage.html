@@ -6,15 +6,20 @@
         <link rel="stylesheet" href="mainpagestyle.css">
     </head>
     <body>
-        <nav class="side-bar">
-            <header>
-                <div class="image-div">
-                    <span class="image">
-                        <img src="res/hamburger_icon.png">
-                    </span>
-                </div>
-            </header>
-        </nav>
+        
+        <script src="sidebarscripts.js"></script>
+
+        <div class="side-bar">
+            <a href="#" class="close-button" onclick="closeSideBar()">&times;</a>
+            <a href="#">первый</a>
+            <a href="#">Кластеризация</a>
+            <a href="#">Генетический алгоритм</a>
+            <a href="#">Муравьиный алгоритм</a>
+            <a href="#">Дерево решений</a>
+            <a href="#">Нейронная сеть</a>
+        </div>
+        
+        <button class="open-button" onclick="openSideBar()">&#9776;</button>
 
         <div class="container">
             container content
