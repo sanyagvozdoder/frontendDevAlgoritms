@@ -29,7 +29,7 @@ body {
 
 .button {
     display: inline-block;
-    background-color: #8c35c5;
+    background: #8c35c5;
     border-radius: 7px;
     padding: 10px 20px;
     font-size: 12pt;
@@ -44,40 +44,65 @@ body {
     cursor: grab;
 }
 
-.button:before
-{
-    background: rgba(0, 0, 0, 0.0);
-    content: '';
-    width: 100%;
-    height: min-content;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-.button:before:hover{
-    background: rgba(0, 0, 0, 1);
+.button:hover{
+    background: #7c2faf;
     transition: 228ms;
 }
 
 .button:active {
+    background: #6f2a9d;
+    transition: 228ms;
     cursor: grabbing;
 }
 
 .button-light{
-    background-color: #eae8e2;
+    background: #eae8e2;
     color: #181818;
 }
 
+.button-light:hover{
+    background: #d4d2cd;
+}
+
+
+.button-light:active{
+    background: #c3c2bd;
+}
+
 .button-green{
-    background-color: #11b417;
+    background: #11b417;
+}
+
+.button-green:hover{
+    background: #0e9913;
+}
+
+.button-green:active{
+    background: #0d8a11;
 }
 
 .button-red{
-    background-color: #b41111;
+    background: #b41111;
+}
+
+.button-red:hover{
+    background: #a51010;
+}
+
+.button-red:active{
+    background: #8f0d0d;
 }
 
 .button-yellow{
-    background-color: #d0cd0a;
+    background: #d0cd0a;
+}
+
+.button-yellow:hover{
+    background: #bebb09;
+}
+
+.button-yellow:active{
+    background: #aaa708;
 }
 
 .container {
