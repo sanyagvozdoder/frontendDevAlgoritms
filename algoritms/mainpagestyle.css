@@ -5,9 +5,14 @@
 .image-div img{
     width:60px;
     border-radius: 10px;
+    position: absolute;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap');
+
+html {   
+    height: 100%;
+}
 
 body {
     margin: 0;
@@ -15,10 +20,11 @@ body {
     font-family: "Wix Madefor Display", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    height: 100%;
 }
 
 .button {
-    display: block;
+    display: inline-block;
     background-color: #8c35c5;
     border-radius: 7px;
     padding: 10px 20px;
@@ -30,17 +36,26 @@ body {
     box-shadow: 5px 5px 1em rgba(0, 0, 0, 0.3);
     width: min-content;
     height: min-content;
+    text-wrap: nowrap;
     cursor: grab;
 }
 
-.button:hover {
-    background-color: #7126a2;
+.button:before
+{
+    background: rgba(0, 0, 0, 0.0);
+    content: '';
+    width: 100%;
+    height: min-content;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.button:before:hover{
+    background: rgba(0, 0, 0, 1);
     transition: 228ms;
 }
 
 .button:active {
-    background-color: #4b1770;
-    transition: 228ms;
     cursor: grabbing;
 }
 
@@ -49,15 +64,22 @@ body {
     color: #181818;
 }
 
-.button-light:hover{
-    background-color: #c5c3be;
+.button-green{
+    background-color: #11b417;
 }
 
-.button-light:active{
-    background-color: #8d8c88;
+.button-red{
+    background-color: #b41111;
+}
+
+.button-yellow{
+    background-color: #d0cd0a;
 }
 
 .container {
     width: 75%;
+    height: 100%;
     margin: 0 auto;
+    background-color: #cecabd0c;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
 }
