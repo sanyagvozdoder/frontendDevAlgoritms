@@ -1,6 +1,11 @@
 function openSideBar(){
-    document.getElementsByClassName('side-bar').style.width = '250px'
+    document.getElementById('side-nav').style.width = "275px"
 }
 function closeSideBar(){
-    document.getElementsByClassName('side-bar').style.width = '0px'
+    document.getElementById('side-nav').style.width = "0px"
 }
+
+var openButton = document.getElementById("openbutton")
+openButton.onmouseover = openSideBar
+var sidebar = document.getElementById('side-nav')
+sidebar.onmouseleave = closeSideBar

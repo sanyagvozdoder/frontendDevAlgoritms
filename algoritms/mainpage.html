@@ -6,25 +6,27 @@
         <link rel="stylesheet" href="mainpagestyle.css">
     </head>
     <body>
-        
-        <script src="sidebarscripts.js"></script>
 
-        <div class="side-bar">
+        <div id="side-nav" class="side-bar">
             <button href="#" class="close-button" onclick="closeSideBar()">&times;</button>
-            <button href="#">первый</button>
-            <button href="#">Кластеризация</button>
-            <button href="#">Генетический алгоритм</button>
-            <button href="#">Муравьиный алгоритм</button>
-            <button href="#">Дерево решений</button>
-            <button href="#">Нейронная сеть</button>
+            <button href="#" class="navlinks">На главную</button>
+            <button href="#" class="navlinks">Первый</button>
+            <button href="#" class="navlinks">Кластеризация</button>
+            <button href="#" class="navlinks">Генетический алгоритм</button>
+            <button href="#" class="navlinks">Муравьиный алгоритм</button>
+            <button href="#" class="navlinks">Дерево решений</button>
+            <button href="#" class="navlinks">Нейронная сеть</button>
         </div>
-        
-        <button class="open-button" onclick="openSideBar()">&#9776;</button>
+        <!--TODO: add icons-->
+
+        <button id="openbutton" class="button open-button" onclick="openSideBar()">&#9776;</button>
 
         <div class="container">
             container content
             <button class="button">Кнопка</button>   
             <a href="#" class="button button-light">ссылка</a>  
         </div>
+
+        <script src="sidebarscripts.js"></script>
      </body>
 </html>
