@@ -19,17 +19,45 @@ body {
 
 .button {
     display: block;
-    background-color: #9d4bd3;
+    background-color: #8c35c5;
     border-radius: 7px;
     padding: 10px 20px;
-    font-size: 14pt;
-    color: white;
+    font-size: 12pt;
+    font-style: normal;
+    text-decoration: none;
+    color: #f2f3fb;
+    border: none;
+    box-shadow: 5px 5px 1em rgba(0, 0, 0, 0.3);
+    width: min-content;
+    height: min-content;
+    cursor: grab;
 }
 
-.side-bar {
+.button:hover {
+    background-color: #7126a2;
+    transition: 228ms;
+}
 
+.button:active {
+    background-color: #4b1770;
+    transition: 228ms;
+    cursor: grabbing;
+}
+
+.button-light{
+    background-color: #eae8e2;
+    color: #181818;
+}
+
+.button-light:hover{
+    background-color: #c5c3be;
+}
+
+.button-light:active{
+    background-color: #8d8c88;
 }
 
 .container {
-
+    width: 75%;
+    margin: 0 auto;
 }
