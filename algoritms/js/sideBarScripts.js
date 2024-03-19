@@ -1,8 +1,10 @@
 function openSideBar(){
     document.getElementById('side-nav').style.width = "275px"
+    document.getElementById('main-container').style.marginLeft = "275px"
 }
 function closeSideBar(){
     document.getElementById('side-nav').style.width = "0px"
+    document.getElementById('main-container').style.marginLeft = "210px"
 }
 
 var openButton = document.getElementById("openbutton")
