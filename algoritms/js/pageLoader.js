@@ -11,9 +11,13 @@ async function getFileContent(url){
 }
 
 async function loadPage(url){
+    let block = document.querySelector("#content-block")
     try {
+        block.classList.remove("op-1-sm")
+        block.innerHTML = ""
 		let data = await getFileContent(url)
-		document.querySelector("#content-block").innerHTML = data
+		block.innerHTML = data
+        block.classList.add("op-1-sm")
 	}
 	catch(e) {
 		alert(e.message)
