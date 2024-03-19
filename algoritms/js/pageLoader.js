@@ -10,12 +10,23 @@ async function getFileContent(url){
     return content
 }
 
-document.querySelector("#load").addEventListener('click', async function() {
-	try {
-		let text_data = await getFileContent("../html/pages/test.html");
-		document.querySelector("#content-block").innerHTML = text_data;
+async function loadPage(url){
+    try {
+		let data = await getFileContent(url)
+		document.querySelector("#content-block").innerHTML = data
 	}
 	catch(e) {
-		alert(e.message);
+		alert(e.message)
 	}
+}
+
+let homePage = "../html/pages/home.html"
+
+document.querySelectorAll('[data-loadpage]').forEach(btn => {
+    btn.addEventListener('click', event => { 
+        loadPage(event.currentTarget.getAttribute('data-loadpage')); 
+    })
 });
+
+// by default load home.html
+loadPage(homePage)
