@@ -24,11 +24,36 @@ async function loadPage(url){
 	}
 }
 
+let body = document.body;
+
+let scriptsList = []
+
+function makeScript(url)
+{
+    let script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = url
+    body.appendChild(script)
+    scriptsList.push(script)
+}
+
+function removeCustomScripts()
+{
+    while(scriptsList.length > 0)
+    {
+        scriptsList.pop().remove()
+    }
+}
+
 let homePage = "../html/pages/home.html"
 
 document.querySelectorAll('[data-loadpage]').forEach(btn => {
-    btn.addEventListener('click', event => { 
-        loadPage(event.currentTarget.getAttribute('data-loadpage')); 
+    btn.addEventListener('click', async function(event) { 
+        removeCustomScripts()
+        let tg = event.currentTarget;
+        await loadPage(tg.getAttribute('data-loadpage'))
+        if(tg.hasAttribute('data-loadscript'))
+        {makeScript(tg.getAttribute('data-loadscript'))}
     })
 });
 

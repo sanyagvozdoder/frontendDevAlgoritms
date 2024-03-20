@@ -234,3 +234,23 @@ table {
     opacity: 1;
     transition: 500ms ease-in-out;
 }
+
+input {
+    display: inline-block;
+    border-radius: 7px;
+    padding: 10px 20px;
+    font-size: 12pt;
+    font-style: normal;
+    text-decoration: none;
+    border: none;
+    box-shadow: 5px 5px 1em rgba(0, 0, 0, 0.3);
+    width: min-content;
+    height: min-content;
+    text-wrap: nowrap;
+}
+
+.input-title{
+    font-size: 14pt;
+    font-weight: bolder;
+    margin-right: 8pt;
+}

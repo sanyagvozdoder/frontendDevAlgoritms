@@ -1,5 +1,3 @@
-
-
 <div id="main-container" class="container">
     <div id="page-topper" class="page-topper">
         <h1 class="t-center">Algorithms showroom</h1>
@@ -10,42 +8,14 @@
             Some Important info about the Algorithm.<br>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, porro? Labore magnam incidunt debitis adipisci itaque, sint reprehenderit in eligendi, voluptatibus repellendus quis nemo mollitia exercitationem distinctio ut libero ipsam.
         </p>
-        <h1 class="t-center mt">The interactive demo</h1>
-        <input type="number" />
+        <h1 class="t-center mt">Интерактивный лабиринт</h1>
         <div class="astar-demo">
-            <table>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="buttons-block mt">
-                <button class="button button-green">Run!</button>
-                <button class="button button-red">Regenerate map</button>
+            <div class="buttons-block mt t-center">
+                <span class="input-title">Размер:</span>
+                <input id="map-size" type="number" class="w-100" value="8" min="4" max="16"/>
+                <button id="generate-btn" class="button button-blue">Перегенерировать</button>
             </div>
+            <div id="map"></div>
         </div>
-        <script src="../../js/algorithms/astar.js"></script>
     </div>
 </div>
