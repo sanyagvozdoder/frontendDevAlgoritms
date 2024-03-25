@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="main-container" class="container">
+    <div id="page-topper" class="page-topper">
+        <h1 class="t-center">{% block title %}{% endblock %}</h1>
+    </div>
+    <div class="v-padding-block">
+      {% block details %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

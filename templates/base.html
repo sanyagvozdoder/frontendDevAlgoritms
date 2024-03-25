@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Приветствуем!{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/sidenav.css') }}">
+        {% block extra_styles %}{% endblock %}
+    </head>
+    <body>
+        <div id="side-nav" class="side-bar">
+            <button class="close-button" onclick="closeSideBar()">&times;</button>
+            <a href="{{ url_for('index') }}" onclick="closeSideBar()">На главную</a>
+            <a href="{{ url_for('algorithm_details', name='astar') }}" onclick="closeSideBar()">A* (A-star)</a>
+            <a href="{{ url_for('algorithm_details', name='clusterization') }}" onclick="closeSideBar()">Кластеризация</a>
+            <a href="{{ url_for('algorithm_details', name='genetic') }}" onclick="closeSideBar()">Генетический алгоритм</a>
+            <a href="{{ url_for('algorithm_details', name='ant') }}" onclick="closeSideBar()">Муравьиный алгоритм</a>
+            <a href="{{ url_for('algorithm_details', name='slntree') }}" onclick="closeSideBar()">Дерево решений</a>
+            <a href="{{ url_for('algorithm_details', name='neural') }}" onclick="closeSideBar()">Нейронная сеть</a>
+        </div>
+        <!--TODO: add icons-->
+
+        <button id="openbutton" class="button open-button" onclick="openSideBar()">&#9776;</button>
+
+        {% block content %}{% endblock %}
+        <div id="content-block" class="op-0"></div>
+
+        <script src="{{ url_for('static', filename='js/sideBar.js') }}"></script>
+        {% block extra_scripts %}{% endblock %}
+     </body>
+</html>

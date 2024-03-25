@@ -1,0 +1,112 @@
+*{
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap');
+
+html {   
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: #e7e6e3;
+    font-family: "Wix Madefor Display", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    height: 100%;
+}
+
+
+.container {
+    width: 75%;
+    height: 100%;
+    margin: 0 200px;
+    padding: 0%;
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    display: block;
+    transition: margin-left 0.5s;
+}
+
+.v-padding-block{
+    padding: 15pt;
+}
+
+.page-topper{
+    display: block;
+    width: 100%;
+    height: calc(min(min-content, 100px));
+    background-color: #a03ae4;
+    padding: 5pt;
+    color: white;
+    top: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+} 
+
+p {
+    padding: 10pt;
+    background: rgba(253, 232, 255, 0.575);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.t-center{
+    text-align: center;
+}
+
+.mt{
+    margin-top: 10px;
+}
+
+table td {
+    border: solid 1px rgba(0, 0, 0, 0.3);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.op-0 {
+    opacity: 0;
+}
+
+.op-1-sm{
+    opacity: 1;
+    transition: 500ms ease-in-out;
+}
+
+input {
+    display: inline-block;
+    border-radius: 7px;
+    padding: 10px 20px;
+    font-size: 12pt;
+    font-style: normal;
+    text-decoration: none;
+    border: none;
+    box-shadow: 5px 5px 1em rgba(0, 0, 0, 0.3);
+    width: min-content;
+    height: min-content;
+    text-wrap: nowrap;
+}
+
+.input-title{
+    font-size: 14pt;
+    font-weight: bolder;
+    margin-right: 8pt;
+}
+
+.link {
+    display: inline-block;
+    width: min-content;
+    text-decoration: none;
+    color: #1b98d7;
+    cursor: pointer;
+}
+
+.link:hover{
+    color: #167bae;
+    text-decoration: underline;
+}

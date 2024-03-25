@@ -7,7 +7,6 @@ function closeSideBar(){
     document.getElementById('side-nav').style.width = "0px"
     document.getElementById('main-container').style.marginLeft = "210px"
     document.getElementById('main-container').style.opacity = "1"
-
 }
 
 var openButton = document.getElementById("openbutton")

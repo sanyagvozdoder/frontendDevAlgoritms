@@ -1,0 +1,46 @@
+{% extends 'algorithm_details.html' %}
+
+{% block title %}Поиск A*{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specific/astar.css') }}">
+{% endblock %}
+{% block extra_scripts %}
+<script type="module" src="{{ url_for('static', filename='js/algorithms/priorityQueue.js') }}"></script>
+<script  type="module" src="{{ url_for('static', filename='js/algorithms/astar.js') }}"></script>
+{% endblock %}
+
+{% block details %}
+<p class="mt">
+    Поиск A* (произносится «А звезда» или «А стар», от англ. A star) — в информатике и математике, алгоритм поиска по первому наилучшему совпадению на графе, который находит маршрут с наименьшей стоимостью от одной вершины (начальной) к другой (целевой, конечной).
+    <br>
+    <a href="https://ru.wikipedia.org/wiki/A*" class="link mt" target="_blank">Википедия</a>
+</p>
+<h1 class="t-center mt">Интерактивное поле экспериментов</h1>
+<div class="astar-demo">
+    <div class="mt">
+        <span class="input-title">Размер сетки:</span>
+        <input id="map-size" type="number" class="w-100" value="9" step="2" min="9" max="29"/><br>
+        <span class="input-title">Генерировать лабиринт:</span>
+        <input id="maze-toggle" type="checkbox" class="w-100"/><br>
+        <button id="generate-btn" class="button mt">Применить</button><br>
+    </div>
+    <div class="mt">
+        <span class="input-title">Отображать просматриваемые клетки:</span>
+        <input id="show-path-toggle" type="checkbox" checked class="w-100"/><br>
+        <span class="input-title">Включить анимацию:</span>
+        <input id="use-anim-toggle" type="checkbox" checked class="w-100"/><br>
+    </div>
+    <hr>
+    <div id="map" class="mt"></div>
+    <div class="mt">
+        <select id="tool-select" class="button button-green">
+            <option value="0">Установка цели</option>
+            <option value="1">Изменение карты</option>
+            <option value="2">Установка т. респавна</option>
+        </select>
+        <button id="clear-btn" class="button button-light">Очистить путь</button>
+        <button id="respawn-btn" class="button button-yellow">Респавн</button><br>
+    </div>
+</div>
+{% endblock %}

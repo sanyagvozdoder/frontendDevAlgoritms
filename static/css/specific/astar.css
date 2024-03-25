@@ -1,0 +1,47 @@
+
+.astar-demo{
+    width: 50%;
+    margin: auto;
+}
+
+.astar-demo table{
+    width: 100%;
+    aspect-ratio: 1;
+    table-layout: fixed;
+}
+
+.astar-demo table td {
+    width: 100%;
+    aspect-ratio: 1;
+    text-align: center;
+    background-color: #c0c0c07c;
+    cursor: pointer;
+    color: #00000000;
+    padding: 0;
+}
+
+.astar-demo table td:hover {
+    background-color: #b7b1b6a8;
+    transition: 100ms ease-out;
+}
+
+.astar-demo table td.blocked {
+    background-color: #000000cb;
+    cursor:not-allowed;
+}
+.astar-demo table td.seen {
+    background-color: #2b5e8594;
+    color: #000000;
+}
+.astar-demo table td.visited {
+    background-color: #bebe2acb;
+}
+.astar-demo table td.spawn {
+    background-color: #c512cb89;
+}
+.astar-demo table td.finish {
+    background-color: #15b41570;
+}
+.astar-demo table td.current {
+    background-color: #cd8227cb;
+}

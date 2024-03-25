@@ -1,0 +1,54 @@
+
+
+.side-bar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    background-color:#8c35c5;
+    padding-top: 40px;
+    transition: 0.5s;
+}
+
+.side-bar a{
+    display:block;
+    padding: 10px 10px 10px 50px;
+    font-size: 18px;
+    color: #C0C0C0;
+    border: none;
+    background-color: transparent;
+    text-wrap: nowrap;
+    text-decoration: none;
+}
+
+.side-bar a:hover{
+    color: #fff;
+}
+
+.side-bar button.close-button {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 40px;
+    margin-left: 50px;
+    background-color: transparent;
+    display:block;
+    border: none;
+    color: #C0C0C0;
+    cursor: pointer;
+}
+
+.side-bar button.close-button:hover{
+    color: #fff;
+}
+
+.open-button{
+    width: 60px;
+    height:60px;
+    border-radius: 0px;
+    padding: 0;
+    font-size: 30px;
+    float: left;
+}

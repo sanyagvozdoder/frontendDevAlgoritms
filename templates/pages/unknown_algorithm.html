@@ -1,0 +1,13 @@
+{% extends 'algorithm_details.html' %}
+
+{% block title %}Ничего не найдено{% endblock %}
+
+{% block details %}
+<div class="t-center">
+    <h1 class="mt">Мы не нашли такой алгоритм у нас на сервере</h1>
+    <h2 class="mt">
+        Похоже, интересующий Вас алгоритм НЕ является интересным, либо не существует в природе.
+    </h2>
+    <a href="{{ url_for('index') }}" class="button mt">На главную</a>
+</div>
+{% endblock %}
