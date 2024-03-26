@@ -7,15 +7,14 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script  type="module" src="{{ url_for('static', filename='js/algorithms/drawing.js') }}"></script>
 <script  type="module" src="{{ url_for('static', filename='js/algorithms/clusterization.js') }}"></script>
 {% endblock %}
 
 {% block details %}
 <div class="t-center">
-<canvas id="paintCanvas" width="400" height="400" style="border: 1px solid black; background-color: white;";></canvas>
+<canvas id="paintCanvas" width="800" height="400" style="border: 1px solid black; background-color: white;";></canvas>
+<button class = "button" onclick="kMeanClusterizationOnCanvas(points, context)">Метод К-средних</button>
+<button class = "button button-red" onclick="clear(context)">очистить</button>
 </div>
-<button onclick="startPainting()">Начать рисование</button>
-<button onclick="stopPainting()">Закончить рисование</button>
 
 {% endblock %}
