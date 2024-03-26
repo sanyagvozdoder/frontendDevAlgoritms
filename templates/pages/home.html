@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specific/homepage.css') }}">
+{% endblock %}
+
 {% block content %}
-<p class="t-center">
-    ==place contents of home page here==<br>
-    ==всем добра и позитива!==
-</p>
+<div id="main-container" class="container">
+    <div id="page-topper" class="page-topper"></div>
+    <div class="newContainer">
+        <div style="color: black;font-size: 100px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Interesting Algorythms</div>
+        <div class="button" style="font-size: 50px;position: relative;">Let's begin!</div>
+    </div>
+    <div id="page-topper" class="page-topper"></div>
+</div>
 {% endblock %}

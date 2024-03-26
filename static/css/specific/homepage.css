@@ -1,0 +1,14 @@
+.newContainer {
+    background-image: url(../../img/homepageBG.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    aspect-ratio: 1;
+    padding: 10rem;
+    display: block;
+    opacity: 1;
+    position: relative;
+    text-align: center;
+    transition: 1000ms ease-in-out;
+    color: white;
+}
