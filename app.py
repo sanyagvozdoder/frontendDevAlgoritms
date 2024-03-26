@@ -4,6 +4,7 @@ app = Flask(__name__)
 
 algorithms_templates = {
     'astar': 'pages/astar.html',
+    'nn':'pages/neural_network.html'
 }
 
 @app.route('/')

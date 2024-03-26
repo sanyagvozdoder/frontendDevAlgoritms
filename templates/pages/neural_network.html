@@ -1,0 +1,19 @@
+{% extends 'algorithm_details.html' %}
+
+{% block title %}Нейронная сеть{% endblock %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/specific/nn.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons') }}">
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="module" src="{{ url_for('static', filename='js/algorithms/canvasDrawing.js') }}"></script>
+{% endblock %}
+
+{% block details %}
+    <div class="painter">
+        <canvas class="canvas" id="canvas"></canvas>
+        <button class="calculate button button-green">Guess</button>
+        <button id="clear" class="button button-red">Clear</button>
+    </div>
+{% endblock %}
