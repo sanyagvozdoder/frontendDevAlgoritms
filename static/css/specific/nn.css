@@ -1,14 +1,4 @@
-.painter{
-    width:50%;
-    margin:300px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .canvas{
-    width:500px;
-    height:500px;
     border: 5px solid;
     border-color: black;
 }

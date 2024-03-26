@@ -8,7 +8,7 @@ let prevY = null
 
 
 context.strokeStyle = "black"
-context.lineWidth = 1
+context.lineWidth = 10
 context.lineCap = 'round'
 
 clear.addEventListener('click',(e)=>{
@@ -25,8 +25,6 @@ window.addEventListener('mouseup',e=>{
 
 canvas.addEventListener('mousemove',e=>{
     console.log("work")
-    const offsetX = canvas.getBoundingClientRect().left;
-    const offsetY = canvas.getBoundingClientRect().top;
 
     if(!isPaint || prevX == null || prevY == null){
         prevX = e.clientX
@@ -34,14 +32,16 @@ canvas.addEventListener('mousemove',e=>{
         return;
     }
 
+    let currentX = e.clientX
+    let currentY = e.clientY
+
     context.beginPath()
     context.moveTo(prevX - canvas.offsetLeft,prevY - canvas.offsetTop)
-    context.lineTo(e.clientX - canvas.offsetLeft,e.clientY - canvas.offsetTop)
-    context.closePath()
+    context.lineTo(currentX - canvas.offsetLeft,currentY - canvas.offsetTop)
     context.stroke()
 
-    prevX = e.clientX
-    prevY = e.clientY
+    prevX = currentX
+    prevY = currentY
 })
 
 
