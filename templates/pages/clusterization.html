@@ -12,9 +12,12 @@
 
 {% block details %}
 <div class="t-center">
-<canvas id="paintCanvas" width="800" height="400" style="border: 1px solid black; background-color: white;";></canvas>
-<button class = "button" onclick="kMeanClusterizationOnCanvas(points, context)">Метод К-средних</button>
-<button class = "button button-red" onclick="clear(context)">очистить</button>
+    <canvas id="paintCanvas" width="800" height="400" style="border: 1px solid black; background-color: white;";></canvas>
+</div>
+<div class="t-center">
+    <button class = "button" id = "algos">Метод К-средних</button>
+    <button class = "button" id = "algos2">Иерархический</button>
+    <button class = "button button-red" id = "goslingCSS">очистить</button>
 </div>
 
 {% endblock %}
