@@ -1,4 +1,4 @@
-.newContainer {
+.background {
     background-image: url(../../img/homepageBG.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -11,4 +11,14 @@
     text-align: center;
     transition: 1000ms ease-in-out;
     color: white;
+}
+
+.hpTitle{
+    color: white;
+    -webkit-text-stroke: #8c35c5 2px;
+    font-size: 100px;
+
+    backdrop-filter: blur(8px);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
 }
