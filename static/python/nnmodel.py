@@ -1,15 +1,35 @@
 import numpy as np
+import json
 
 file = open('static\\res\\weightsandbiases.txt','r')
 
-def loss(predictions, targets):
-    return -np.sum(np.log(predictions + 10**-100) * targets)
+flag = False
+pic = []
+
+def get_data(data):
+    global pic
+    global flag
+    
+    temp_data = []
+
+    for i in range(0,10000,4):
+        r = float(data[str(i)])
+        g = float(data[str(i+1)])
+        b = float(data[str(i+2)])
+
+        color = (255 - (0.299 * r + 0.587 * g + 0.114 * b))/255.0
+
+        temp_data.append(color)
+        
+
+    pic = temp_data
+    pic = np.array(pic).T
+    flag = True
+
 
 def sigmoid (x):
     return 1/(1 + np.exp(-x))
 
-def sigmoid_derivative(x):
-    return x * (1 - x)
 
 class Layer:
     def __init__(self,inputSize,neuronsSize):
@@ -18,11 +38,23 @@ class Layer:
 
         for i in range(inputSize):
             for j in range(neuronsSize):
-                self.weights[i][j] = float(file.readline())
+                f = file.readline()
+
+                if(f == ''):
+                    continue
+
+                self.weights[i][j] = float(f)
 
         for i in range(neuronsSize):
-            self.biases[0][i] = float(file.readline())
+            f = file.readline()
 
+            if(f == ''):
+                continue
+
+            self.biases[0][i] = float(f)
+
+        self.weights = np.array(self.weights)
+        self.biases = np.array(self.biases)
 
     def forward(self,inputs):
         self.output = np.dot(inputs,self.weights) + self.biases
@@ -32,7 +64,6 @@ class NeuralNetwork:
         self.inputSize = inputSize
         self.hiddenSize = hiddenSize
         self.outputSize = outputSize
-        self.learningRate = 0.001
 
         self.hiddenLayer = Layer(self.inputSize, self.hiddenSize)
         self.outputLayer = Layer(self.hiddenSize, self.outputSize)
@@ -56,9 +87,18 @@ class NeuralNetwork:
 
         return index
 
-nn = NeuralNetwork(784, 500, 10)
+nn = NeuralNetwork(2500, 1250, 10)
 
 
+def get_answer():
+    global pic
+
+    while not flag:
+        pass
+    
+    return str(nn.answer(pic))
+
+    pic = []
 
 
 
