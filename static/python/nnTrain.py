@@ -1,11 +1,8 @@
 import numpy as np
-
+import cv2
 
 filePath = "C:\\Users\\user\\Desktop\\testsfornn\\mnist_train.csv"
 data = np.genfromtxt(filePath, delimiter=',')
-
-data = np.array(data)
-rows,cols = data.shape
 
 def loss(predictions, targets):
     return -np.sum(np.log(predictions + 10**-100) * targets)
@@ -28,7 +25,7 @@ class NeuralNetwork:
         self.inputSize = inputSize
         self.hiddenSize = hiddenSize
         self.outputSize = outputSize
-        self.learningRate = 0.001
+        self.learningRate = 0.0001
 
         self.hiddenLayer = Layer(self.inputSize, self.hiddenSize)
         self.outputLayer = Layer(self.hiddenSize, self.outputSize)
@@ -70,44 +67,53 @@ class NeuralNetwork:
             self.backPropagation(targets)
             print("Epoch: ",epoch," Loss: ", loss(self.outputLayer.output,targets))
 
-nn = NeuralNetwork(784, 500, 10)
+nn = NeuralNetwork(2500, 1500, 10)
+
+data = np.array(data)
+rows,cols = data.shape
+np.random.shuffle(data)
+
+train_answers = data.T[0]
+pxTrain = data.T[1:cols]
+
+train_data = [[]*2500 for _ in range(60000)]
+
+for i in range(pxTrain.shape[1]):
+    temp_data = []
+    temp_data.append(cv2.resize(pxTrain[:,i], (50, 50)))
+
+    for j in range(50):
+        for k in range(50):
+            train_data[i].append(temp_data[0][j][k])
 
 
-for j in range(7):
+train_data = np.array(train_data).T
 
-    np.random.shuffle(data)
-
-    dataTrain = data[0:5000].T
-    outTrain = dataTrain[0]
-    pxTrain = dataTrain[1:cols]
-
-    for i in range(5000):
-        inputs = pxTrain[:,i]
-        targetsCreate = lambda x: [1 if j == x else 0 for j in range(10)]
-        targets = targetsCreate(outTrain[i])
-        nn.train(inputs,targets,10)
-        print("Try: ",i)
+for i in range(60000):
+    inputs = train_data[:,i]
+    targetsCreate = lambda x: [1 if j == x else 0 for j in range(10)]
+    targets = targetsCreate(train_answers[i])
+    nn.train(inputs,targets,3)
+    print("Try: ",i)
 
 
 cnt = 0
 
-np.random.shuffle(data)
+train_answers = train_answers[0:1000]
+train_data = train_data[:,0:1000]
 
-dataDev = data[5000:rows].T
-outDev = dataDev[0]
-pxDev = dataDev[1:cols]
 
-for i in range(rows-5000):
-    inputs = pxDev[:, i]
+for i in range(1000):
+    inputs = train_data[:,i]
     answerNN = nn.answer(inputs)
 
-    if(outDev[i] == answerNN):
+    if(train_answers[i] == answerNN):
         cnt+=1
         print("Correct")
     else:
         print("Wrong")
 
-    print("Correct: ", outDev[i]," Answer: ", answerNN)
+    print("Correct: ", train_answers[i]," Answer: ", answerNN)
 
 print("Accuracy: ", (cnt/(rows-5000)) * 100)
 
