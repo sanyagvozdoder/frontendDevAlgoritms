@@ -1,0 +1,16 @@
+{% extends 'algorithm_details.html' %}
+
+{% block title %}Муравьиный алгоритм{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/antcolony.css') }}">
+{% endblock %}
+
+{% block extra_scripts %}
+<script  type="module" src="{{ url_for('static', filename='js/algorithms/antcolony.js') }}"></script>
+{% endblock %}
+
+
+{% block details %}
+<button class="button button-red" onclick="window.location.href='auto.drom.ru/ivanovka-prim/lada/2121_4x4_niva/167943135.html'"></button>
+{% endblock %}
