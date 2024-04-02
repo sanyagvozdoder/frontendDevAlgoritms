@@ -7,7 +7,8 @@ app.secret_key = "super secret key"
 algorithms_templates = {
     'astar': 'pages/astar.html',
     'nn':'pages/neural_network.html',
-    'clusterization': 'pages/clusterization.html'
+    'clusterization': 'pages/clusterization.html',
+    'slntree': 'pages/slntree.html',
 }
 
 @app.route('/')

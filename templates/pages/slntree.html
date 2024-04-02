@@ -1,0 +1,82 @@
+{% extends 'algorithm_details.html' %}
+
+{% block title %}Дерево решений{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specific/slntree.css') }}">
+{% endblock %}
+
+{% block details %}
+
+<p>
+    <b>Дерево принятия решений</b> - средство поддержки принятия решений, использующееся в машинном обучении, анализе данных и статистике. 
+    <a class="link mt" href="https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE_%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B9">
+        Википедия
+    </a>
+</p>
+
+<div class="mt">
+    <br>
+    <h2>Обучающая выборка (Формат - CSV, разделитель - точка с запятой)</h2>
+    <br>
+    <span>Названия столбцов</span>
+    <input id="tr_columns" style="width: 100%;" />
+    <br>
+    <br>
+    <span>Содержание</span>
+    <textarea id="tr_data"></textarea>
+    <br>
+    <br>
+    <button class="button button-green" id="generate">Сгенерировать дерево</button>
+</div>
+<hr>
+<!-- src https://codepen.io/rahmatrudianto/pen/VwXEQZo -->
+<div class="tree">
+    <div class="body genealogy-body genealogy-scroll">
+        <div class="genealogy-tree">
+          <ul>
+            <li>
+                <a class="button" href="javascript:void(0);">
+                  roditel
+                </a>
+              <ul class="active">
+                <li>
+                    <a class="button" href="javascript:void(0);">
+                    rebenok1
+                    </a>
+                </li>
+                <li>
+                  <a class="button" href="javascript:void(0);">
+                    R.E.B.E.N.O.K. 2: Heart Of ChErnobyl
+                  </a>
+                  <ul>
+                    <li>
+                        <a class="button" href="javascript:void(0);">
+                          YALOX
+                        </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+</div>
+<hr>
+<div class="mt">
+    <br>
+    <h2>Ввод (Формат - CSV, разделитель - точка с запятой)</h2>
+    <span>*введите те данные, по которым хотите найти решение</span>
+    <br>
+    <textarea id="traindata"></textarea>
+    <br>
+    <br>
+    <button class="button" id="generate">Найти решение</button>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script  type="text/javascript" src="{{ url_for('static', filename='js/algorithms/slntree.js') }}"></script>
+{% endblock %}

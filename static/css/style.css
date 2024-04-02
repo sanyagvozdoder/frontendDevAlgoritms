@@ -78,7 +78,7 @@ table {
     transition: 500ms ease-in-out;
 }
 
-input {
+input, textarea {
     display: inline-block;
     border-radius: 7px;
     padding: 10px 20px;
@@ -90,6 +90,14 @@ input {
     width: min-content;
     height: min-content;
     text-wrap: nowrap;
+}
+
+textarea {
+    padding: 10px;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: fit-content;
 }
 
 .input-title{
