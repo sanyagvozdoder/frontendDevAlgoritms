@@ -8,7 +8,8 @@ algorithms_templates = {
     'astar': 'pages/astar.html',
     'nn':'pages/neural_network.html',
     'clusterization': 'pages/clusterization.html',
-    'slntree': 'pages/slntree.html',
+    'slntree': 'pages/slntree.html',,
+    'antcolony': 'pages/antcolony.html'
 }
 
 @app.route('/')
