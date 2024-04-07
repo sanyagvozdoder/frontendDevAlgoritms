@@ -17,64 +17,44 @@
 
 <div class="mt">
     <br>
-    <h2>Обучающая выборка (Формат - CSV, разделитель - точка с запятой)</h2>
-    <br>
-    <span>Названия столбцов</span>
-    <input id="tr_columns" style="width: 100%;" />
-    <br>
-    <br>
-    <span>Содержание</span>
-    <textarea id="tr_data"></textarea>
-    <br>
-    <br>
-    <button class="button button-green" id="generate">Сгенерировать дерево</button>
+    <h1>Конфигурация</h1>
+    <h3>Обучающая выборка (Формат - CSV, разделитель - точка с запятой ";")</h3>
+    <div class="mt">
+      <span>Названия характеристик</span>
+      <input id="tr_columns" style="width: 100%;" />
+    </div>
+    <div class="mt">
+      <span>Содержание</span>
+      <textarea id="tr_data"></textarea>
+    </div>
+    <hr>
+    <div class="mt">
+      <span>Искомая характеристика</span>
+      <input id="cfg_column" style="width: 100%;" />
+    </div>
+    <div class="mt">
+      <span>Игнорируемые характеристики</span>
+      <input id="cfg_ignore_columns" style="width: 100%;" />
+    </div>
+    <div class="mt">
+      <button class="button button-green" id="generate">Построить дерево</button>
+    </div>
+    <hr>
+    <div class="mt">
+      <span>Известные значения (оставьте прочерк "-" там, где значение не известно)</span>
+      <input id="decision_info" style="width: 100%;" />
+    </div>
+    <div class="mt">
+      <button class="button button-green" id="decide">Вынести вердикт</button>
+      <span id="decision"></span>
+    </div>
 </div>
 <hr>
 <!-- src https://codepen.io/rahmatrudianto/pen/VwXEQZo -->
-<div class="tree">
-    <div class="body genealogy-body genealogy-scroll">
-        <div class="genealogy-tree">
-          <ul>
-            <li>
-                <a class="button" href="javascript:void(0);">
-                  roditel
-                </a>
-              <ul class="active">
-                <li>
-                    <a class="button" href="javascript:void(0);">
-                    rebenok1
-                    </a>
-                </li>
-                <li>
-                  <a class="button" href="javascript:void(0);">
-                    R.E.B.E.N.O.K. 2: Heart Of ChErnobyl
-                  </a>
-                  <ul>
-                    <li>
-                        <a class="button" href="javascript:void(0);">
-                          YALOX
-                        </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
+<h1>Дерево</h1>
+<div class="tree-block">
+  <div class="tree" id="decision-tree-parent"></div>
 </div>
-<hr>
-<div class="mt">
-    <br>
-    <h2>Ввод (Формат - CSV, разделитель - точка с запятой)</h2>
-    <span>*введите те данные, по которым хотите найти решение</span>
-    <br>
-    <textarea id="traindata"></textarea>
-    <br>
-    <br>
-    <button class="button" id="generate">Найти решение</button>
-</div>
-
 {% endblock %}
 
 {% block extra_scripts %}
