@@ -16,7 +16,7 @@ function draw(event)
     points.push({ x, y });
     
     context.fillStyle = "black";
-    context.fillRect(x, y, 7, 7);
+    context.fillRect(x, y, 15, 15);
 
 }
 canvas.addEventListener('click', draw);
@@ -115,17 +115,17 @@ function kMeanClusterizationOnCanvas(points, context)
     for (let i = 0; i < clusters[0].length; i++)
     {
         context.fillStyle = 'orange';
-        context.fillRect(clusters[0][i].x, clusters[0][i].y, 3, 3);
+        context.fillRect(clusters[0][i].x, clusters[0][i].y, 15, 5);
     }
     for (let i = 0; i < clusters[1].length; i++)
     {
         context.fillStyle = 'red';
-        context.fillRect(clusters[1][i].x, clusters[1][i].y, 3, 3);
+        context.fillRect(clusters[1][i].x, clusters[1][i].y,  15, 5);
     }
     for (let i = 0; i < clusters[2].length; i++)
     {
         context.fillStyle = 'green';
-        context.fillRect(clusters[2][i].x, clusters[2][i].y, 3, 3);
+        context.fillRect(clusters[2][i].x, clusters[2][i].y,  15, 5);
     }
 }
 
@@ -172,17 +172,17 @@ function hierarchicalClusterizationOnCanvas(points, context)
     for (let i = 0; i < clusters[0].length; i++)
     {
         context.fillStyle = 'blue';
-        context.fillRect(clusters[0][i].x + 4, clusters[0][i].y, 3, 3);
+        context.fillRect(clusters[0][i].x, clusters[0][i].y + 5,  15, 5);
     }
     for (let i = 0; i < clusters[1].length; i++)
     {
         context.fillStyle = 'yellow';
-        context.fillRect(clusters[1][i].x + 4, clusters[1][i].y, 3, 3);
+        context.fillRect(clusters[1][i].x, clusters[1][i].y + 5,  15, 5);
     }
     for (let i = 0; i < clusters[2].length; i++)
     {
         context.fillStyle = 'pink';
-        context.fillRect(clusters[2][i].x + 4, clusters[2][i].y, 3, 3);
+        context.fillRect(clusters[2][i].x, clusters[2][i].y + 5,  15, 5);
     }
 }
 
@@ -275,17 +275,17 @@ function kMedoidsClusterizationOnCanvas(points, context)
     for (let i = 0; i < clusters[0].length; i++)
     {
         context.fillStyle = '#FFE4E1';
-        context.fillRect(clusters[0][i].x + 2, clusters[0][i].y + 4, 3, 3);
+        context.fillRect(clusters[0][i].x, clusters[0][i].y + 10,  15, 5);
     }
     for (let i = 0; i < clusters[1].length; i++)
     {
         context.fillStyle = '#00FFFF';
-        context.fillRect(clusters[1][i].x + 2, clusters[1][i].y + 4, 3, 3);
+        context.fillRect(clusters[1][i].x, clusters[1][i].y + 10,  15, 5);
     }
     for (let i = 0; i < clusters[2].length; i++)
     {
         context.fillStyle = '#FF00FF';
-        context.fillRect(clusters[2][i].x + 2, clusters[2][i].y + 4, 3, 3);
+        context.fillRect(clusters[2][i].x, clusters[2][i].y + 10, 15, 5);
     }
 }
 
