@@ -1,0 +1,17 @@
+{% extends 'algorithm_details.html' %}
+
+{% block title %}Генетический алгоритм на примере задачи коммивояжёра{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specific/gen.css') }}">
+{% endblock %}
+{% block extra_scripts %}
+<script  type="module" src="{{ url_for('static', filename='js/algorithms/gen.js') }}"></script>
+{% endblock %}
+
+{% block details %}
+<div class="painter t-center">
+    <canvas id="canvas" class="field" height="750" width="1500" ></canvas><br>
+    <button class="button-green button" id="start">click</button>
+</div>
+{% endblock %}

@@ -9,7 +9,8 @@ algorithms_templates = {
     'nn':'pages/neural_network.html',
     'clusterization': 'pages/clusterization.html',
     'slntree': 'pages/slntree.html',
-    'antcolony': 'pages/antcolony.html'
+    'antcolony': 'pages/antcolony.html',
+    'genetic' : 'pages/gen.html'
 }
 
 @app.route('/')
