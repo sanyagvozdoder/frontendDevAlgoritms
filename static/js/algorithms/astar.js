@@ -138,9 +138,19 @@ function findPath(start, goal, map)
     return [path, fValues]
 }
 
+let inUse = false
+
 async function onCellClick(event)
 {
+    if(inUse)
+    {
+        alert("Выполняется операция, подождите")
+        return
+    }
+
     clearTravelUI()
+
+    inUse = true
 
     let btn = event.currentTarget
     let x = btn.getAttribute("data-x")
@@ -167,7 +177,8 @@ async function onCellClick(event)
 
         if(pathInfo.length == 0)
         {
-            alert("path not found")
+            alert("Путь до выбранной клетки не найден")
+            inUse = false
             return
         }
 
@@ -185,7 +196,7 @@ async function onCellClick(event)
                 step.uiCell.classList.add("seen")
                 step.uiCell.innerHTML = data[2]
 
-                if(useAnim) await sleep(10)
+                if(useAnim) await sleep(1)
             }
         }
 
@@ -194,13 +205,13 @@ async function onCellClick(event)
         for(let step of p)
         {
             step.uiCell.classList.add("visited")
-            if(useAnim) await sleep(20)
+            if(useAnim) await sleep(2)
         }
 
         for(let step of p)
         {
             setCurrentPos(step.x, step.y)
-            if(useAnim) await sleep(30)
+            if(useAnim) await sleep(5)
         }
     }
 
@@ -208,6 +219,7 @@ async function onCellClick(event)
     {
         setSpawnPos(x, y)
     }
+    inUse = false
 }
 
 let showMap = (map) =>
@@ -256,91 +268,57 @@ function shuffle(array)
   }
 
 // https://habr.com/ru/articles/537630/
-function generateMaze()
+// https://habr.com/ru/articles/318530/
+async function generateMaze()
 {
-    let useAnim = document.getElementById("use-anim-toggle").checked;
+    let useAnim = document.getElementById("use-anim-toggle").checked
 
-    let size = parseInt(document.getElementById("map-size").value);
-    console.log(size)
-    let start = [0, 0]
-    let finish = [Math.floor(Math.random() * size / 2) * 2 + 1, Math.floor(Math.random() * size / 2) * 2 + 1]
+    let size = parseInt(document.getElementById("map-size").value)
 
     for(let row of map)
-    {
         for(let cell of row)
-        {
             cell.lock()
-        }
-    }
 
-    //map[start[0]][start[1]].locked = false
-    map[finish[0]][finish[1]].unlock()
+    let cur = [Math.floor(Math.random() * size / 2) * 2, Math.floor(Math.random() * size / 2) * 2]
+    let start = cur
+    map[cur[0]][cur[1]].unlock()
+    map[cur[0]][cur[1]].uiCell.classList.add("finish")
 
-    let x = finish[0]
-    let y = finish[1]
-    let check = []
+    let stack = []
+    stack.push(cur)
 
-    if (y - 2 >= 0) check.push([x, y - 2])
-    if (y + 2 < size) check.push([x, y + 2])
-    if (x - 2 >= 0) check.push([x - 2, y])
-    if (x + 2 < size) check.push([x + 2, y])
-
-    while(check.length > 0)
+    while(stack.length > 0)
     {
-        let idx = Math.floor(Math.random() * check.length)
-        let coords = check[idx]
-        x = coords[0]
-        y = coords[1]
-        map[x][y].unlock()
-        check.splice(idx, 1)
-
-        let dirs = [[0, -1], [-1, 0], [1, 0], [0, 1]]
-        dirs = shuffle(dirs)
+        let dirs = [[1, 0], [0, -1], [0, 1], [-1, 0]]
+        let chosen = false
 
         while(dirs.length > 0)
         {
-            //let dirIndex = 0//Math.floor(Math.random() * dirs.length)
-            //console.log(dirs, dirIndex)
-            let dir = dirs.pop()//dirs[dirIndex]
+            let idx = Math.floor(Math.random() * dirs.length)
+            let curDir = dirs[idx]
+            dirs.splice(idx, 1)
 
-            let x2 = x + dir[0]
-            let y2 = y + dir[1]
-            //dirs.splice(dirIndex, 1)
+            let nextW = [cur[0] + curDir[0], cur[1] + curDir[1]]
+            let next = [cur[0] + curDir[0] * 2, cur[1] + curDir[1] * 2]
 
-            if (x2 + dir[0] < 0) continue
-            if (x2 + dir[0] >= size) continue
-            if (y2 + dir[1] < 0) continue
-            if (y2 + dir[1] >= size) continue
-            if(map[x2 + dir[0]][y2 + dir[1]].locked) continue
+            if(next[0] < 0 || next[0] >= size) continue
+            if(next[1] < 0 || next[1] >= size) continue
+            if(map[next[0]][next[1]].locked == false) continue
 
-            map[x2][y2].unlock()
-            start = [x2, y2]
-            break
+            map[nextW[0]][nextW[1]].unlock()
+            map[next[0]][next[1]].unlock()
+            stack.push(next)
+            start = next
+            chosen = true
         }
 
-        if (y - 2 >= 0 && map[x][y - 2].locked) check.push([x, y - 2])
-        if (y + 2 < size && map[x][y + 2].locked) check.push([x, y + 2])
-        if (x - 2 >= 0 && map[x - 2][y].locked) check.push([x - 2, y])
-        if (x + 2 < size && map[x + 2][y].locked) check.push([x + 2, y])
-        
-        //if(useAnim) await sleep(1)
-    }
-
-    for (let x = 0; x < size; ++x)
-    {
-        let flag = false
-        for (let y = 0; y < size; ++y)
+        if(!chosen)
         {
-            let node = map[x][y]
-            if(node.locked == false)
-            {
-                setSpawnPos(x, y)
-                flag = true
-                break
-            }
+            cur = stack.pop()
         }
-        if(flag) break
     }
+
+    setSpawnPos(start[0], start[1])
     respawn()
 }
 

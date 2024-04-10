@@ -12,5 +12,11 @@
 
 
 {% block details %}
-<button class="button button-red" onclick="window.location.href='auto.drom.ru/ivanovka-prim/lada/2121_4x4_niva/167943135.html'"></button>
+<div class="t-center">
+    <canvas id="paintCanvas" width="900" height="600" style="border: 3px solid #8c35c5; background-color: black;";></canvas>
+</div>
+<button class = "button" id = "drawColonies">Расположить колонии</button>
+<button class = "button" id = "drawWalls">Расположить стены</button>
+<button class = "button" id = "drawFood">Расположить источники пищи</button>
+<button class = "button button-red" id = "goslingCSS">очистить</button>
 {% endblock %}
