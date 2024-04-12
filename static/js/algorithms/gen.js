@@ -88,6 +88,29 @@ function drawPath(bestPath){
     }
 }
 
+function mutate(path){
+    if(Math.random(1) > 0.1){
+        let index1 = Math.floor(Math.random() * (path.length - 2) + 1)
+
+        let index2 = 0
+
+        while(true){
+            index2 = Math.floor(Math.random() * (path.length - 2) + 1) 
+
+            if(index2 != index1){
+                break
+            }
+        }
+
+        let temp = path[index1]
+
+        path[index1] = path[index2]
+        path[index2] = temp
+    }
+
+    return path
+}
+
 class Individ{
     path
     distance
@@ -102,7 +125,7 @@ class Individ{
             this.distance += distanceBetween(points[this.path[i]],points[this.path[i+1]])
         }
 
-        this.fitness = 1 / (this.distance+1)
+        this.fitness = 1 / (Math.pow(this.distance,8) + 1)
     }
 
     makeChild(other) {
@@ -141,6 +164,7 @@ class Individ{
 class Generation{
     arrOfInds
     bestInd
+    bestDist
 
     constructor(arr){
         this.arrOfInds = arr
@@ -148,15 +172,17 @@ class Generation{
         let sum = 0
         let bestFit = 0
 
-        for(let i = 0; i < points.length; i++){
-            sum += arr[i].fitness
+        for(let i = 0; i < this.arrOfInds.length; i++){
+            sum += this.arrOfInds[i].fitness
         }
 
-        for(let i = 0; i < points.length; i++){
-            arr[i].fitness = arr[i].fitness / sum
+        for(let i = 0; i < this.arrOfInds.length; i++){
+            this.arrOfInds[i].fitness = this.arrOfInds[i].fitness / sum
 
-            if(bestFit < arr[i].fitness){
-                this.bestInd = arr[i].path
+            if(bestFit < this.arrOfInds[i].fitness){
+                this.bestDist = this.arrOfInds[i].distance
+                this.bestInd = this.arrOfInds[i].path
+                bestFit = this.arrOfInds[i].fitness
             }
         }
     }
@@ -165,15 +191,20 @@ class Generation{
 async function start(){
     let arr = []
 
-    for(let i = 0;i<100;i++){
+    for(let i = 0;i<points.length * 2;i++){
         let ph = fillingRand()
         let ind = new Individ(ph)
+
         arr.push(ind)
     }
 
-    let curGen = new Generation(arr)
+    let counterForEsc = 0
 
-    for (let index = 0; index < points.length; index++){
+    let curGen = new Generation(arr)
+    let bestIndivid = curGen.bestInd
+    let bestIndDist = curGen.bestDist
+
+    while(counterForEsc<1000){
         context.strokeStyle = "rgba(175, 175, 175, 1)"
 
         for (let i = 0; i < points.length-1; i++) {
@@ -190,24 +221,50 @@ async function start(){
 
         drawPath(curGen.bestInd)
 
-        await new Promise(resolve => setTimeout(resolve, 100))
+        await new Promise(resolve => setTimeout(resolve, 1))
 
         let arrInds = []
 
-        for (let i = 0; i < points.length; i++) {
+        for (let i = 0; i < curGen.arrOfInds.length; i++) {
 
             let pathA = curGen.arrOfInds[pickRandomProb(curGen.arrOfInds.map(ind=>{return ind.fitness}))]
             let pathB = curGen.arrOfInds[pickRandomProb(curGen.arrOfInds.map(ind=>{return ind.fitness}))]
 
-            let child = new Individ(pathA.makeChild(pathB))
+            let child = pathA.makeChild(pathB)
             
-
-            arrInds.push(child)
+            let mutatedChild = new Individ(mutate(child))
+            arrInds.push(mutatedChild)
         }
 
         curGen = new Generation(arrInds)
+
+        if(bestIndDist > curGen.bestDist){
+            bestIndDist = curGen.bestDist
+            bestIndivid = curGen.bestInd
+            counterForEsc = 0
+        }
+        else{
+            counterForEsc++
+        }
     }
 
+    context.strokeStyle = "rgba(175, 175, 175, 1)"
+
+        for (let i = 0; i < points.length-1; i++) {
+            for (let j = i+1; j < points.length; j++) {
+                context.beginPath()
+                context.moveTo(points[i].x + vertexSize/2,points[i].y + vertexSize/2)
+                context.lineTo(points[j].x + vertexSize/2,points[j].y + vertexSize/2)
+                context.stroke()
+            }
+            
+        }
+
+    context.strokeStyle = "rgba(255, 138, 0, 1)"
+
+    drawPath(bestIndivid)
+
+    console.log("END")
 }
 
 
