@@ -15,10 +15,10 @@
 
 .hpTitle{
     color: white;
-    -webkit-text-stroke: #8c35c5 2px;
+    -webkit-text-stroke: #8c35c5 3px;
     font-size: 100px;
 
     backdrop-filter: blur(8px);
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, fantasy;
 
 }
