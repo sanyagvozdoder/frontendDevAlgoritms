@@ -9,39 +9,64 @@ let prevY = null
 
 
 context.strokeStyle = "black"
-context.lineWidth = 6
+context.lineWidth = 15
 context.lineCap = 'round'
-context.fillStyle = "white";
-context.fillRect(0,0,50,50)
+context.fillStyle = "white"
+context.fillRect(0,0,500,500)
 
 clear.addEventListener('click',(e)=>{
-    context.fillRect(0,0,50,50)
+    context.fillRect(0,0,500,500)
+
+    let labelOuput = document.getElementById('output')
+    labelOuput.innerHTML = ""
 })
 
-get.addEventListener('click',e=>{
-    const pic = context.getImageData(0,0,50,50)
-
-    console.log(JSON.stringify(pic.data))
-
-    $.ajax({
-        url:"/data_from_canvas",
-        type:"POST",
-        dataType:"json",
-        contentType:"application/json",
-        data:JSON.stringify(pic.data),
-        success:response=>{
-            console.log("response")
-        }
+function postPic(data) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url:"/data_from_canvas",
+            type:"POST",
+            dataType:"json",
+            contentType:"application/json",
+            data:JSON.stringify(data),
+            success: (response) => {
+                resolve(response)
+            },
+            error: (response) => {
+                reject(response)
+            }
+        })
     })
-    $.ajax({
-        url:'/data_to_js',
-        type:"GET",
-        success:response=>{
-            let labelOuput = document.getElementById('output')
-            labelOuput.innerHTML = "Ваша цифра: " + response
-        }
+}
+
+function getAns() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url:'/data_to_js',
+            type:"GET",
+            success: (response) => {
+                let labelOutput = document.getElementById('output')
+                labelOutput.innerHTML = "Ваша цифра: " + response
+                resolve(response)
+            },
+            error: (response) => {
+                reject(response)
+            }
+        })
     })
-})
+}
+
+
+async function requestToServer(){
+    const pic = context.getImageData(0,0,500,500)
+
+    await postPic(pic.data).then().catch(e=> console.log(e))
+    
+    await getAns()
+}
+
+
+get.addEventListener('click',requestToServer)
 
 canvas.addEventListener('mousedown',e =>{
     isPaint = true
@@ -52,7 +77,6 @@ window.addEventListener('mouseup',e=>{
 })
 
 canvas.addEventListener('mousemove',e=>{
-    console.log("work")
 
     if(!isPaint || prevX == null || prevY == null){
         prevX = e.clientX

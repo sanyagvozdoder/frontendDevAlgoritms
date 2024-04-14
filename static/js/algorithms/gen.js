@@ -191,7 +191,7 @@ class Generation{
 async function start(){
     let arr = []
 
-    for(let i = 0;i<points.length * 2;i++){
+    for(let i = 0;i<points.length * points.length;i++){
         let ph = fillingRand()
         let ind = new Individ(ph)
 
@@ -204,7 +204,7 @@ async function start(){
     let bestIndivid = curGen.bestInd
     let bestIndDist = curGen.bestDist
 
-    while(counterForEsc<1000){
+    while(counterForEsc<500){
         context.strokeStyle = "rgba(175, 175, 175, 1)"
 
         for (let i = 0; i < points.length-1; i++) {

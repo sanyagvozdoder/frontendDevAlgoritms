@@ -25,15 +25,16 @@ def algorithm_details(name):
     return render_template(algorithms_templates[name])
 
 @app.route('/data_from_canvas', methods=['POST'])
-def receive():
+async def receive():
     session['data'] = request.get_json()
-    get_data(session['data'])
-    return "OK"
+    resp = await get_data(session['data']) 
+    return resp
+    
 
 @app.route('/data_to_js', methods = ['GET'])
 def send():
-    session['test'] = get_answer()
-    return jsonify(session['test'])
+    session['answer'] = get_answer()
+    return jsonify(session['answer'])
 
 if __name__ == '__main__':
     app.debug = True
