@@ -12,18 +12,36 @@
     </head>
     <body>
         <div id="side-nav" class="side-bar">
-            <button class="close-button" onclick="closeSideBar()">&times;</button>
-            <a href="{{ url_for('index') }}" onclick="closeSideBar()">На главную</a>
-            <a href="{{ url_for('algorithm_details', name='astar') }}" onclick="closeSideBar()">A* (A-star)</a>
-            <a href="{{ url_for('algorithm_details', name='clusterization') }}" onclick="closeSideBar()">Кластеризация</a>
-            <a href="{{ url_for('algorithm_details', name='genetic') }}" onclick="closeSideBar()">Генетический алгоритм</a>
-            <a href="{{ url_for('algorithm_details', name='antcolony') }}" onclick="closeSideBar()">Муравьиный алгоритм</a>
-            <a href="{{ url_for('algorithm_details', name='slntree') }}" onclick="closeSideBar()">Дерево решений</a>
-            <a href="{{ url_for('algorithm_details', name='nn') }}" onclick="closeSideBar()">Нейронная сеть</a>
+            <a onclick="closeSideBar()" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='res/icons/home.png')}}"></img>
+                <span>На главную</span>
+            </a>
+            <a onclick="closeSideBar()" href="{{ url_for('algorithm_details', name='astar') }}">
+                <img src="{{ url_for('static', filename='res/icons/star.png')}}"></img>
+                <span>A* (A-star)</span>
+            </a>
+            <a onclick="closeSideBar()" href="{{ url_for('algorithm_details', name='clusterization') }}">
+                <img src="{{ url_for('static', filename='res/icons/cluster.png')}}"></img>
+                <span>Кластеризация</span>
+            </a>
+            <a onclick="closeSideBar()" href="{{ url_for('algorithm_details', name='genetic') }}">
+                <img src="{{ url_for('static', filename='res/icons/dna.png')}}"></img>
+                <span>Генетический алгоритм</span>
+            </a>
+            <a onclick="closeSideBar()" href="{{ url_for('algorithm_details', name='antcolony') }}">
+                <img src="{{ url_for('static', filename='res/icons/insect.png')}}"></img>
+                <span>Муравьиный алгоритм</span>
+            </a>
+            <a onclick="closeSideBar()" href="{{ url_for('algorithm_details', name='slntree') }}">
+                <img src="{{ url_for('static', filename='res/icons/decision-tree.png')}}"></img>
+                <span>Дерево решений</span>
+            </a>
+            <a onclick="closeSideBar()" href="{{ url_for('algorithm_details', name='nn') }}">
+                <img src="{{ url_for('static', filename='res/icons/neural-network.png')}}"></img>
+                <span>Нейронная сеть</span>
+            </a>
         </div>
         <!--TODO: add icons-->
-
-        <button id="openbutton" class="button open-button" onclick="openSideBar()">&#9776;</button>
 
         {% block content %}{% endblock %}
         <div id="content-block" class="op-0"></div>

@@ -8,6 +8,9 @@ context.lineWidth = 4
 context.lineCap = 'round'
 const vertexSize = 10
 
+context.fillStyle = "white"
+context.fillRect(0,0,1000,750)
+
 function distanceBetween(pointA, pointB)
 {
     const dx = pointA.x - pointB.x

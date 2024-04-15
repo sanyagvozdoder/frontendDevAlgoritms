@@ -10,7 +10,7 @@ html {
 
 body {
     margin: 0;
-    background-color: #e7e6e3;
+    background-color: rgb(20,20,20);
     font-family: "Wix Madefor Display", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
@@ -37,7 +37,7 @@ body {
     display: block;
     width: 100%;
     height: calc(min(min-content, 100px));
-    background-color: #a03ae4;
+    background-color: rgb(12, 83, 166);
     padding: 5pt;
     color: white;
     top: 0;

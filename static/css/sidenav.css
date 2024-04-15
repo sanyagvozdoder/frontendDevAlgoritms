@@ -1,54 +1,67 @@
-
-
 .side-bar {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    width: 0;
+    width: 50px;
     position: fixed;
     top: 0;
     left: 0;
     overflow-x: hidden;
-    background-color:#8c35c5;
-    padding-top: 40px;
+    overflow-y: hidden;
+    background-color: rgb(43, 106, 188);
     transition: 0.5s;
 }
 
 .side-bar a{
-    display:block;
-    padding: 10px 10px 10px 50px;
-    font-size: 18px;
-    color: #C0C0C0;
-    border: none;
-    background-color: transparent;
-    text-wrap: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: start;
+    flex-direction: row;
     text-decoration: none;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    min-width: auto;
+    border:5px solid transparent;
+    transition: all ease-in-out;
 }
 
 .side-bar a:hover{
     color: #fff;
+    animation: move 500ms forwards;
 }
 
-.side-bar button.close-button {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 40px;
-    margin-left: 50px;
-    background-color: transparent;
-    display:block;
-    border: none;
+.side-bar span{
+    white-space: nowrap;
+    font-size: 20px;
     color: #C0C0C0;
-    cursor: pointer;
+    border: none;
+    padding-top: 5px;
+    padding-left: 12px;
+    background-color: transparent;
+    text-decoration: none;
 }
 
-.side-bar button.close-button:hover{
-    color: #fff;
+.side-bar img{
+    width:30px;
+    height:30px;
 }
 
-.open-button{
-    width: 60px;
-    height:60px;
-    border-radius: 0px;
-    padding: 0;
-    font-size: 30px;
-    float: left;
+@keyframes move {
+    0%{
+        border-bottom: 5px solid rgb(20,20,20);
+    }
+    50%{
+        border-left: 5px solid rgb(20,20,20);
+        border-bottom: 5px solid rgb(20,20,20);
+        border-right: 5px solid rgb(20,20,20);
+    }
+    100%{
+        border-left: 5px solid rgb(20,20,20);
+        border-bottom: 5px solid rgb(20,20,20);
+        border-right: 5px solid rgb(20,20,20);
+        border-top: 5px solid rgb(20,20,20);
+        box-shadow: 0px 0px 30px rgb(20,20,20);
+    }
 }
