@@ -2,6 +2,19 @@ const canvas = document.getElementById('paintCanvas');
 const context = canvas.getContext('2d');
 let points = [];
 
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateRandomHexColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[getRandomNumber(0, 15)];
+    }
+    return color;
+}
+
 function distance(pointA, pointB) {
     const dx = pointA.x - pointB.x;
     const dy = pointA.y - pointB.y;
@@ -90,25 +103,22 @@ function kMeanClusterization(points, amount) {
 
 function kMeanClusterizationOnCanvas(points, context) {
 
-    if (points.length < 3) {
-        alert("Вы ввели меньше 3 точек");
+    let size = parseInt(document.getElementById("clustersAmount").value);
+    if (size >  points.length)
+    {
+        alert("Вы поствили меньше ${size} точек");
         return;
     }
+    let color;
+    let clusters = kMeanClusterization(points, size);
 
-    let clusters = kMeanClusterization(points, 3);
-
-
-    for (let i = 0; i < clusters[0].length; i++) {
-        context.fillStyle = 'orange';
-        context.fillRect(clusters[0][i].x, clusters[0][i].y, 15, 5);
-    }
-    for (let i = 0; i < clusters[1].length; i++) {
-        context.fillStyle = 'red';
-        context.fillRect(clusters[1][i].x, clusters[1][i].y, 15, 5);
-    }
-    for (let i = 0; i < clusters[2].length; i++) {
-        context.fillStyle = 'green';
-        context.fillRect(clusters[2][i].x, clusters[2][i].y, 15, 5);
+    for (let i = 0; i < size; i++)
+    {
+        color = generateRandomHexColor();
+        for (let j = 0; j < clusters[i].length; j++) {
+            context.fillStyle = color;
+            context.fillRect(clusters[i][j].x, clusters[i][j].y, 15, 5);
+        }
     }
 }
 
@@ -138,25 +148,23 @@ function hierarchicalClusterization(points, amount) {
 }
 
 function hierarchicalClusterizationOnCanvas(points, context) {
-    if (points.length < 3) {
-        alert("Вы ввели меньше 3 точек")
-        return
+    let size = parseInt(document.getElementById("clustersAmount").value);
+    if (size >  points.length)
+    {
+        alert("Вы поствили меньше ${size} точек")
+        return;
     }
 
-    let clusters = hierarchicalClusterization(points, 3);
+    let color;
+    let clusters = hierarchicalClusterization(points, size);
 
-
-    for (let i = 0; i < clusters[0].length; i++) {
-        context.fillStyle = 'blue';
-        context.fillRect(clusters[0][i].x, clusters[0][i].y + 5, 15, 5);
-    }
-    for (let i = 0; i < clusters[1].length; i++) {
-        context.fillStyle = 'yellow';
-        context.fillRect(clusters[1][i].x, clusters[1][i].y + 5, 15, 5);
-    }
-    for (let i = 0; i < clusters[2].length; i++) {
-        context.fillStyle = 'pink';
-        context.fillRect(clusters[2][i].x, clusters[2][i].y + 5, 15, 5);
+    for (let i = 0; i < size; i++)
+    {
+        color = generateRandomHexColor();
+        for (let j = 0; j < clusters[i].length; j++) {
+            context.fillStyle = color;
+            context.fillRect(clusters[i][j].x, clusters[i][j].y + 5, 15, 5);
+        }
     }
 }
 
@@ -175,6 +183,7 @@ function chooseMedoids(points, amount) {
 function kMedoidsClusterization(points, amount) {
     let medoids = chooseMedoids(points, amount)
     let clusters = [];
+    
 
     for (let i = 0; i < amount; ++i) {
         clusters.push([])
@@ -226,25 +235,25 @@ function kMedoidsClusterization(points, amount) {
 }
 
 function kMedoidsClusterizationOnCanvas(points, context) {
-    if (points.length < 3) {
-        alert("Вы ввели меньше 3 точек")
-        return
-    }
 
-    let clusters = kMedoidsClusterization(points, 3);
+    let size = parseInt(document.getElementById("clustersAmount").value);
+
+    if (size >  points.length)
+    {
+        alert("Вы поствили меньше ${size} точек")
+        return;
+    }
+    let color;
+    let clusters = kMedoidsClusterization(points, size);
 
 
-    for (let i = 0; i < clusters[0].length; i++) {
-        context.fillStyle = '#FFE4E1';
-        context.fillRect(clusters[0][i].x, clusters[0][i].y + 10, 15, 5);
-    }
-    for (let i = 0; i < clusters[1].length; i++) {
-        context.fillStyle = '#00FFFF';
-        context.fillRect(clusters[1][i].x, clusters[1][i].y + 10, 15, 5);
-    }
-    for (let i = 0; i < clusters[2].length; i++) {
-        context.fillStyle = '#FF00FF';
-        context.fillRect(clusters[2][i].x, clusters[2][i].y + 10, 15, 5);
+    for (let i = 0; i < size; i++)
+    {
+        color = generateRandomHexColor();
+        for (let j = 0; j < clusters[i].length; j++) {
+            context.fillStyle = color;
+            context.fillRect(clusters[i][j].x, clusters[i][j].y + 10, 15, 5);
+        }
     }
 }
 

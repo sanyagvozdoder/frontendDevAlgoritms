@@ -19,11 +19,9 @@
 </p>
 
 <div class="t-center">
-    <canvas id="paintCanvas" width="900" height="600" style="border: 3px solid #8c35c5; background-color: black;";></canvas>
+    <canvas id="canvas" width="900" height="600" style="border: 3px solid #8c35c5; background-color: black;";></canvas>
 </div>
-
-<button class = "button" id = "drawColonies">Расположить колонии</button>
-<button class = "button" id = "drawWalls">Расположить стены</button>
-<button class = "button" id = "drawFood">Расположить источники пищи</button>
-<button class = "button button-red" id = "goslingCSS">очистить</button>
+<input id="speed" type="range" step="10" list="volsettings" max="200" value="100" min="0">
+<button class = "button" id = "goslingCSS">Начать/Продолжить</button>
+<button class = "button" id = "stop">Остановить</button>
 {% endblock %}
