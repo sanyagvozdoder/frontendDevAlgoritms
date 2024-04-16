@@ -20,39 +20,12 @@
     <canvas id="paintCanvas" width="1000" height="500" style="border: 1px solid black; background-color: white;";></canvas>
 </div>
 <div class="t-center">
+    <input id="clustersAmount" type="number" class="w-100" value="3" step="1" min="1" max="100"/>
     <button class = "button" id = "kMeansActivate">Метод К-средних</button>
     <button class = "button" id = "hierarchicalActivate">Иерархический</button>
     <button class = "button" id = "kMedoidsActivate">k-medoid</button>
     <button class = "button button-red" id = "goslingCSS">очистить</button>
 </div>
 
-<div class="description t-center">
-    <div class="ul-cont">
-        <h3>k-средних</h3>
-        <ul class="list">
-            <li class="orangeSquare"></li>
-            <li class="redSquare"></li>
-            <li class="greenSquare"></li>
-        </ul>
-    </div>
-    
-    <div class="ul-cont">
-        <h3>Иерархический</h3>
-        <ul class="list">
-            <li class="blueSquare"></li>
-            <li class="yellowSquare"></li>
-            <li class="pinkSquare"></li>
-        </ul>
-    </div>
-    <div class="ul-cont">
-        <h3>k-medoid</h3>
-        <ul class="list">
-            <li class="mistyRoseSquare"></li>
-            <li class="cyanSquare"></li>
-            <li class="magentaSquare"></li>
-        </ul>
-    </div>
-    
-</div>
 
 {% endblock %}
