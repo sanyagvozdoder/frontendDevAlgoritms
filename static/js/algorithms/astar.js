@@ -32,14 +32,20 @@ class GraphNode
 
 function setCurrentPos(x, y)
 {
-    map[currentPos[0]][currentPos[1]].uiCell.classList.remove("current")
+    try {
+        map[currentPos[0]][currentPos[1]].uiCell.classList.remove("current")
+    }
+    catch {}
     currentPos = [x, y]
     map[x][y].uiCell.classList.add("current")
 }
 
 function setSpawnPos(x, y)
 {
-    map[spawnPos[0]][spawnPos[1]].uiCell.classList.remove("spawn")
+    try {
+        map[spawnPos[0]][spawnPos[1]].uiCell.classList.remove("spawn")
+    }
+    catch {}
     spawnPos = [x, y]
     map[x][y].uiCell.classList.add("spawn")
 }
@@ -194,7 +200,7 @@ async function onCellClick(event)
             {
                 let step = map[data[0]][data[1]]
                 step.uiCell.classList.add("seen")
-                step.uiCell.innerHTML = data[2]
+                step.uiCell.innerHTML = "<div>"+data[2]+"</div>"
 
                 if(useAnim) await sleep(1)
             }
@@ -226,18 +232,16 @@ let showMap = (map) =>
 {
     let mapDiv = document.getElementById("map")
     mapDiv.innerHTML = ""
-    let tbl = document.createElement("table")
-    mapDiv.appendChild(tbl)
 
     for(let row of map)
     {
-        let uiRow = document.createElement("tr")
-        tbl.appendChild(uiRow)
+        let uiRow = document.createElement("div")
+        mapDiv.appendChild(uiRow)
         for(let elem of row)
         {
-            let cell = document.createElement("td")
+            let cell = document.createElement("div")
             uiRow.appendChild(cell)
-            cell.innerHTML = '0'
+            cell.innerHTML = '<div>0</div>'
             cell.setAttribute("data-x", elem.x)
             cell.setAttribute("data-y", elem.y)
 
@@ -279,7 +283,7 @@ async function generateMaze()
         for(let cell of row)
             cell.lock()
 
-    let cur = [Math.floor(Math.random() * size / 2) * 2, Math.floor(Math.random() * size / 2) * 2]
+    let cur = [size - 1, size -1]// [Math.floor(Math.random() * size / 2) * 2, Math.floor(Math.random() * size / 2) * 2]
     let start = cur
     map[cur[0]][cur[1]].unlock()
     map[cur[0]][cur[1]].uiCell.classList.add("finish")
@@ -318,7 +322,8 @@ async function generateMaze()
         }
     }
 
-    setSpawnPos(start[0], start[1])
+    //setSpawnPos(start[0], start[1])
+    setSpawnPos(0, 0)
     respawn()
 }
 
@@ -360,10 +365,36 @@ function makeMap()
     if(document.getElementById('maze-toggle').checked) generateMaze()
 }
 
-document.getElementById("generate-btn").addEventListener("click", (e) => { makeMap(); })
+document.getElementById("generate-btn").addEventListener("click", (e) => { 
+    if(inUse)
+    {
+        alert("Выполняется операция, подождите")
+        return
+    }
+     
+    makeMap()
 
-document.getElementById("clear-btn").addEventListener("click", clearTravelUI)
-document.getElementById("respawn-btn").addEventListener("click", respawn)
+})
+
+document.getElementById("clear-btn").addEventListener("click", (e) => { 
+    
+    if(inUse)
+    {
+        alert("Выполняется операция, подождите")
+        return
+    }
+
+    clearTravelUI()
+
+})
+document.getElementById("respawn-btn").addEventListener("click", (e) => {
+    if(inUse)
+    {
+        alert("Выполняется операция, подождите")
+        return
+    }    
+    respawn()
+})
 
 document.getElementById("tool-select").addEventListener("change", (e) => {
     tool = e.currentTarget.value

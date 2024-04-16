@@ -2,11 +2,36 @@
 
 {% block content %}
 <div id="main-container" class="container">
-    <div id="page-topper" class="page-topper">
-        <h1 class="t-center">{% block title %}{% endblock %}</h1>
+  <div class="algobox-container">
+      <div id="page-topper" class="page-topper">
+          <h1 class="t-center">{% block title %}{% endblock %}</h1>
+      </div>
+      <div class="algobox">
+        <div class="algopanel">
+          {% block visualization %}{% endblock %}
+        </div>
+        <div class="algocontrol">
+          <div class="tabs">
+            <button class="tab-button" id="controls-btn" onclick="openTab(event, 'controls')">Управление</button>
+            <button class="tab-button" onclick="openTab(event, 'info')">Информация</button>
+          </div>
+          <div class="algocontrol-content">
+            <div id="controls" class="tab-content">
+              {% block controls %}{% endblock %}
+            </div>
+            <div id="info" class="tab-content">
+              {% block info %}{% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="v-padding-block">
+    <!--<div class="v-padding-block">
       {% block details %}{% endblock %}
-    </div>
+    </div>-->
 </div>
+
+<script type="text/javascript">
+  document.getElementById("controls-btn").click()
+</script>
 {% endblock %}

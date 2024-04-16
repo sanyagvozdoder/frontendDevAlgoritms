@@ -1,47 +1,80 @@
 
-.astar-demo{
-    width: 50%;
+.tparent {
+    height: 100%;
+    aspect-ratio: 1;
+}
+
+.maze {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    border-collapse: collapse;
+
+    height: calc(100% - 2rem);
+    width: auto;
+    aspect-ratio: 1;
     margin: auto;
+
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
 }
 
-.astar-demo table{
-    width: 100%;
-    aspect-ratio: 1;
-    table-layout: fixed;
+.maze > div {
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    align-content: center;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
 }
 
-.astar-demo table td {
-    width: 100%;
-    aspect-ratio: 1;
-    text-align: center;
-    background-color: #c0c0c07c;
+.maze:last-child {
+    border-bottom: 1px solid black;
+}
+
+/* cell */
+.maze > div > div {
+    display: flex;
+    flex: auto;
+    flex-grow: 1;
+    flex-basis: 0;
+    align-items: center;
+    justify-content: center;
+
+    max-height: auto;
+
+    border-right: 1px solid black;
+    background-color: #a6d3de;
     cursor: pointer;
-    color: #00000000;
+    overflow: hidden;
     padding: 0;
+    color: transparent;
 }
 
-.astar-demo table td:hover {
-    background-color: #b7b1b6a8;
+.maze > div > div:hover {
+    background-color: #617a81;
     transition: 100ms ease-out;
 }
 
-.astar-demo table td.blocked {
-    background-color: #000000cb;
+.maze > div > div.blocked {
+    background-color: #000000;
     cursor:not-allowed;
 }
-.astar-demo table td.seen {
-    background-color: #2b5e8594;
+.maze > div > div.seen {
+    background-color: #2b5e85;
+    padding: 0;
     color: #000000;
 }
-.astar-demo table td.visited {
-    background-color: #bebe2acb;
+.maze > div > div.visited {
+    background-color: #bebe2a;
 }
-.astar-demo table td.spawn {
-    background-color: #c512cb89;
+.maze > div > div.spawn {
+    background-color: #c512cb;
 }
-.astar-demo table td.finish {
-    background-color: #15b41570;
+.maze > div > div.finish {
+    background-color: #15b415;
 }
-.astar-demo table td.current {
-    background-color: #cd8227cb;
+.maze > div > div.current {
+    background-color: #cd8227;
 }

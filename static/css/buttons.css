@@ -1,7 +1,7 @@
 
 .button {
     display: inline-block;
-    background-color:rgb(12, 83, 166);
+    background-color:rgb(43, 106, 188);
     border-radius: 7px;
     padding: 10px 20px;
     font-size: 12pt;
@@ -13,7 +13,7 @@
     width: min-content;
     height: min-content;
     text-wrap: nowrap;
-    cursor: grab;
+    cursor: pointer;
 }
 
 .button:disabled{
@@ -22,14 +22,13 @@
 
 
 .button:hover{
-    background: #7c2faf;
+    background: rgb(32, 79, 139);
     transition: 228ms;
 }
 
 .button:active {
-    background: #6f2a9d;
+    background: rgb(22, 52, 93);
     transition: 228ms;
-    cursor: grabbing;
 }
 
 .button-light{
@@ -47,15 +46,15 @@
 }
 
 .button-green{
-    background: #11b417;
+    background: #30d91a;
 }
 
 .button-green:hover{
-    background: #0e9913;
+    background: #26d10f;
 }
 
 .button-green:active{
-    background: #0d8a11;
+    background: #199708;
 }
 
 .button-red{
@@ -71,7 +70,7 @@
 }
 
 .button-yellow{
-    background: #d0cd0a;
+    background: #d0af0a;
 }
 
 .button-yellow:hover{

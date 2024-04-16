@@ -11,6 +11,8 @@
         {% block extra_styles %}{% endblock %}
     </head>
     <body>
+
+        <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
         <!--TODO: add icons-->
 
         {% block content %}{% endblock %}
@@ -44,7 +46,7 @@
                 <span>Нейронная сеть</span>
             </a>
         </div>
-
+        
         <script src="{{ url_for('static', filename='js/sideBar.js') }}"></script>
         {% block extra_scripts %}{% endblock %}
      </body>

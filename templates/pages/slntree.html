@@ -6,7 +6,49 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/specific/slntree.css') }}">
 {% endblock %}
 
-{% block details %}
+
+{% block visualization %}
+<!-- src https://codepen.io/rahmatrudianto/pen/VwXEQZo -->
+<div class="tree-block">
+  <div class="tree" id="decision-tree-parent"></div>
+</div>
+{% endblock %}
+
+{% block controls %}
+    <div class="mt">
+      <span class="input-title">Названия характеристик</span>
+      <input id="tr_columns" style="width: 100%;" />
+    </div>
+    <div class="mt">
+      <span class="input-title">Содержание</span>
+      <textarea id="tr_data"></textarea>
+    </div>
+    <hr>
+    <div class="mt">
+      <span class="input-title">Искомая характеристика</span>
+      <input id="cfg_column" style="width: 100%;" />
+    </div>
+    <div class="mt">
+      <span class="input-title">Игнорируемые характеристики</span>
+      <input id="cfg_ignore_columns" style="width: 100%;" />
+    </div>
+    <div class="mt">
+      <button class="button" id="generate"  style="width: 100%;">Построить дерево</button>
+    </div>
+    <hr>
+    <div class="mt">
+      <span class="input-title">Известные данные (если данных нет, "-")</span>
+      <input id="decision_info" style="width: 100%;" />
+    </div>
+    <div class="mt">
+      <button class="button button-green"  style="width: 100%;" id="decide">Вынести вердикт</button>
+    </div>
+{% endblock %}
+
+{% block info %}
+{% endblock %}
+
+{% block ggg %}
 
 <p>
     <b>Дерево принятия решений</b> - средство поддержки принятия решений, использующееся в машинном обучении, анализе данных и статистике. 

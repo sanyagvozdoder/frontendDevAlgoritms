@@ -15,6 +15,7 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     height: 100%;
+    /*overflow: hidden;*/
 }
 
 
@@ -27,6 +28,102 @@ body {
     display: block;
     transition: margin-left 0.5s;
 }
+
+.algobox-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.algobox {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2rem 2.5rem;
+    border-radius: 15px;
+    background-color: #0091ff;
+    box-shadow: 0 0 25px rgba(0, 149, 255, 0.6);
+    opacity: 0.7;
+    overflow: hidden;
+}
+
+.algopanel {
+    flex-shrink: 1;
+    flex: auto;
+    overflow-y: auto;
+    border-right: #012231bd solid 2px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+    align-content: center;
+    animation: fadeEffect 1s;
+}
+
+.algocontrol {
+    overflow-y: auto;
+    width: 450px;
+    background-color: rgba(146, 150, 153, 0.288);
+    overflow: auto;
+}
+
+.algocontrol-content {
+    padding: 10px 20px;
+    overflow: auto;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+.tab-button{
+    flex: auto;
+    display: block;
+    font-size: large;
+    padding: 12pt 12pt;
+    cursor: pointer;
+    border: 0;
+    background-color: #7babd0;
+    transition: ease-in-out 0.1s;
+}
+.tab-button:hover {
+    background-color: #48a3e9;
+}
+.tab-button.active {
+    background-color: #90c9f4;
+    border-bottom: 5px solid #2c5473;
+}
+
+/* https://www.w3schools.com/howto/howto_js_tabs.asp */
+.tab-content {
+animation: fadeEffect 1s; /* Fading effect takes 1 second */
+text-wrap: wrap;
+}
+  
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+from {opacity: 0;}
+to {opacity: 1;}
+}
+
+.block-title{
+    display: block;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.buttons-flex{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.buttons-flex .button-flex{
+    flex: auto;
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
 
 .v-padding-block{
     padding: 15pt;
