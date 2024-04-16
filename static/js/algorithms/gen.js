@@ -71,15 +71,17 @@ function fillingRand(){
 }
 
 function pickRandomProb(prob){
-    let ind = 0
-    let rand = Math.random()
+    let ind = Math.floor(Math.random(1) * prob.length)
+    let rand = Math.random(1)
+    let prevInd = 0
 
     while(rand>0){
         rand -= prob[ind]
-        ind++
+        prevInd = ind
+        ind = Math.floor(Math.random(1) * prob.length)
     }
 
-    return --ind
+    return prevInd
 }
 
 function drawPath(bestPath){
@@ -92,7 +94,7 @@ function drawPath(bestPath){
 }
 
 function mutate(path){
-    if(Math.random(1) > 0.1){
+    if(Math.random(1) > 0.5){
         let index1 = Math.floor(Math.random() * (path.length - 2) + 1)
 
         let index2 = 0
@@ -194,7 +196,7 @@ class Generation{
 async function start(){
     let arr = []
 
-    for(let i = 0;i<points.length * points.length;i++){
+    for(let i = 0;i<points.length * 2;i++){
         let ph = fillingRand()
         let ind = new Individ(ph)
 
@@ -217,14 +219,13 @@ async function start(){
                 context.lineTo(points[j].x + vertexSize/2,points[j].y + vertexSize/2)
                 context.stroke()
             }
-            
         }
 
         context.strokeStyle = "rgba(255, 138, 0, 1)"
 
         drawPath(curGen.bestInd)
 
-        await new Promise(resolve => setTimeout(resolve, 1))
+        await new Promise(r => setTimeout(r, 1))
 
         let arrInds = []
 
@@ -240,6 +241,7 @@ async function start(){
         }
 
         curGen = new Generation(arrInds)
+        console.log(curGen)
 
         if(bestIndDist > curGen.bestDist){
             bestIndDist = curGen.bestDist
@@ -253,21 +255,21 @@ async function start(){
 
     context.strokeStyle = "rgba(175, 175, 175, 1)"
 
-        for (let i = 0; i < points.length-1; i++) {
-            for (let j = i+1; j < points.length; j++) {
-                context.beginPath()
-                context.moveTo(points[i].x + vertexSize/2,points[i].y + vertexSize/2)
-                context.lineTo(points[j].x + vertexSize/2,points[j].y + vertexSize/2)
-                context.stroke()
-            }
-            
+    for (let i = 0; i < points.length-1; i++) {
+        for (let j = i+1; j < points.length; j++) {
+            context.beginPath()
+            context.moveTo(points[i].x + vertexSize/2,points[i].y + vertexSize/2)
+            context.lineTo(points[j].x + vertexSize/2,points[j].y + vertexSize/2)
+            context.stroke()
         }
+        
+    }
 
     context.strokeStyle = "rgba(255, 138, 0, 1)"
 
     drawPath(bestIndivid)
 
-    console.log("END")
+    console.log(bestIndDist)
 }
 
 
