@@ -59,10 +59,11 @@ function getAns() {
 
 async function requestToServer(){
     const pic = context.getImageData(0,0,500,500)
+    console.log(pic.data)
 
     await postPic(pic.data).then().catch(e=> console.log(e))
     
-    await getAns()
+    await getAns().then().catch(e=> console.log(e))
 }
 
 
