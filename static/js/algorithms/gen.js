@@ -20,31 +20,27 @@ function distanceBetween(pointA, pointB)
 
 function draw(event)
 {
-    const x = event.clientX - canvas.offsetLeft
-    const y = event.clientY - canvas.offsetTop
-    
-    context.fillStyle = "black"
-    context.fillRect(x, y, vertexSize, vertexSize)
+    if(canvas.dataset.disable == "false"){
+        const x = event.clientX - canvas.offsetLeft
+        const y = event.clientY - canvas.offsetTop
+        
+        context.fillStyle = "black"
+        context.fillRect(x, y, vertexSize, vertexSize)
 
-    points.forEach(point=>{
-        context.beginPath()
-        context.moveTo(point.x+vertexSize/2,point.y+vertexSize/2)
-        context.lineTo(x + vertexSize/2,y + vertexSize/2)
-        context.stroke()
-    })
+        context.strokeStyle = "rgba(0, 0, 0, 1)"
 
-    points.push({ x, y });
+        points.forEach(point=>{
+            context.beginPath()
+            context.moveTo(point.x+vertexSize/2,point.y+vertexSize/2)
+            context.lineTo(x + vertexSize/2,y + vertexSize/2)
+            context.stroke()
+        })
+
+        points.push({ x, y })
+    }
 }
+
 canvas.addEventListener('click', draw);
-
-/*function clear(context)
-{
-    points = []
-    context.fillStyle = "white"
-    context.fillRect(0, 0, canvas.width, canvas.height)
-}*/
-
-let btn = document.getElementById("start")
 
 function getRandomInt() {
     return Math.floor(Math.random() * points.length);
@@ -194,6 +190,14 @@ class Generation{
 }
 
 async function start(){
+    canvas.dataset.disable = "true"
+
+    let vertState = document.getElementById("numVertexes")
+    let edgesState = document.getElementById("numEdges")
+
+    vertState.innerHTML += points.length
+    edgesState.innerHTML += points.length*(points.length-1)/2
+
     let arr = []
 
     for(let i = 0;i<points.length * 2;i++){
@@ -221,7 +225,7 @@ async function start(){
             }
         }
 
-        context.strokeStyle = "rgba(255, 138, 0, 1)"
+        context.strokeStyle = "rgba(0, 175, 254, 1)"
 
         drawPath(curGen.bestInd)
 
@@ -265,14 +269,30 @@ async function start(){
         
     }
 
-    context.strokeStyle = "rgba(255, 138, 0, 1)"
+    context.strokeStyle = "rgba(0, 175, 254, 1)"
 
     drawPath(bestIndivid)
 
     console.log(bestIndDist)
 }
 
+function reset(){
+    canvas.dataset.disable = "false"
+    points = []
 
-btn.addEventListener('click',start)
+    let vertState = document.getElementById("numVertexes")
+    let edgesState = document.getElementById("numEdges")
 
+    vertState.innerHTML = "Количество вершин:"
+    edgesState.innerHTML = "Количество ребер:"
+
+    context.fillStyle = "white"
+    context.fillRect(0,0,1000,750)
+}
+
+let btnStart = document.getElementById("start")
+btnStart.addEventListener('click',start)
+
+let btnReset = document.getElementById("reset")
+btnReset.addEventListener('click',reset)
 

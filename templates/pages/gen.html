@@ -9,9 +9,33 @@
 <script  type="module" src="{{ url_for('static', filename='js/algorithms/gen.js') }}"></script>
 {% endblock %}
 
-{% block details %}
-<div class="painter t-center">
-    <canvas id="canvas" class="field" height="750" width="1000" ></canvas><br>
-    <button class="button-green button" id="start">click</button>
+{% block visualization %}
+<div class="canvas-container">
+    <canvas id="canvas" class="field" width="1000" height="750" data-disable="false"></canvas>
 </div>
 {% endblock %}
+
+{% block controls %}
+<div class="controller">
+    <div class="constantsOfGraph">
+        <span id="numVertexes">Количество вершин: </span>
+        <span id="numEdges">Количество ребер: </span>
+    </div>
+    <div class="states"></div>
+    <div class="controlbutttons">
+        <button id="start" class="button button-green">Начать</button>
+        <button id="reset" class="button button-red">Очистить все</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block info %}
+<div class="constantsAlgoritm">
+    <span>Частота мутации: 0.5</span>
+    <span>Количество особей в поколении: количество точек * 2</span>
+</div>
+{% endblock %}
+
+
+
+
