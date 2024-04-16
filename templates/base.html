@@ -11,6 +11,9 @@
         {% block extra_styles %}{% endblock %}
     </head>
     <body>
+        <!--TODO: add icons-->
+
+        {% block content %}{% endblock %}
         <div id="side-nav" class="side-bar">
             <a onclick="closeSideBar()" href="{{ url_for('index') }}">
                 <img src="{{ url_for('static', filename='res/icons/home.png')}}"></img>
@@ -41,10 +44,6 @@
                 <span>Нейронная сеть</span>
             </a>
         </div>
-        <!--TODO: add icons-->
-
-        {% block content %}{% endblock %}
-        <div id="content-block" class="op-0"></div>
 
         <script src="{{ url_for('static', filename='js/sideBar.js') }}"></script>
         {% block extra_scripts %}{% endblock %}

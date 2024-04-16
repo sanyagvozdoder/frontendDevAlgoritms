@@ -10,7 +10,7 @@ html {
 
 body {
     margin: 0;
-    background-color: rgb(20,20,20);
+    background-color: #012231;
     font-family: "Wix Madefor Display", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
@@ -19,10 +19,9 @@ body {
 
 
 .container {
-    width: 75%;
     height: 100%;
-    margin: 0 200px;
     padding: 0%;
+    margin-left: 50px;
     background-color: rgba(0, 0, 0, 0.05);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
     display: block;
