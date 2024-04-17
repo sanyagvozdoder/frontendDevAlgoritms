@@ -66,6 +66,8 @@ body {
 }
 
 .algocontrol {
+    display: flex;
+    flex-direction: column;
     overflow-y: hidden;
     width: 450px;
     background-color: rgba(146, 150, 153, 0.288);
@@ -73,8 +75,9 @@ body {
 
 .algocontrol-content {
     padding: 10px 20px;
-    height:100%;
-    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
     overflow: auto;
 }
 
@@ -118,8 +121,8 @@ body {
 
 /* https://www.w3schools.com/howto/howto_js_tabs.asp */
 .tab-content {
-    width:100%;
-    height:100%;
+    display: flex;
+    flex-grow: 1;
     animation: fadeEffect 1s; /* Fading effect takes 1 second */
     text-wrap: wrap;
 animation: fadeEffect 1s; /* Fading effect takes 1 second */
@@ -141,6 +144,7 @@ to {opacity: 1;}
     display: block;
     font-size: 16pt;
     font-weight: bold;
+    margin-bottom: 15px;
 }
 
 .buttons-flex{
@@ -153,6 +157,11 @@ to {opacity: 1;}
     flex: auto;
     flex-basis: 0;
     flex-grow: 1;
+    margin-left: 10px;
+}
+
+.buttons-flex .button-flex:first-child{
+    margin-left: 0;
 }
 
 
@@ -228,8 +237,8 @@ textarea {
 }
 
 .input-title{
-    font-size: 14pt;
-    font-weight: bolder;
+    font-size: 11pt;
+    font-weight: medium;
     margin-right: 8pt;
 }
 
@@ -244,4 +253,20 @@ textarea {
 .link:hover{
     color: #167bae;
     text-decoration: underline;
+}
+
+.named-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+}
+
+.named-input .input-title {
+    display: flex;
+    flex-grow: 1;
+}
+
+.named-input > input {
+    display: flex;
 }

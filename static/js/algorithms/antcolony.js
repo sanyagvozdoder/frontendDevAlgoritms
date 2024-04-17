@@ -181,7 +181,7 @@ async function antColonyOptimization() {
             document.getElementById("stop").innerText = "Продолжить";
             let state = await waitState();
         }
-        document.getElementById("stop").innerText = "Остановить";
+        document.getElementById("stop").innerText = "Приостановить";
         iterations++;
         ants.forEach((ant, index) => {
             if (ant.tour.length <= cities.length) {

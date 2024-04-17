@@ -46,7 +46,7 @@ function getAns() {
             type:"GET",
             success: (response) => {
                 let labelOutput = document.getElementById('output')
-                labelOutput.innerHTML = "Ваша цифра: " + response
+                labelOutput.innerHTML = "" + response
                 resolve(response)
             },
             error: (response) => {

@@ -16,28 +16,50 @@
 {% endblock %}
 
 {% block controls %}
-<div class="controller">
-    <div class="constantsOfGraph">
-        <span id="numVertexes">Количество вершин: </span>
-        <span id="numEdges">Количество ребер: </span>
+<div class="">
+    <span class="block-title">Настройка</span>
+    <div class="">
+        <label for="mutationrate" class="input-title">Шанс мутации: </label>
+        <div class="named-input">
+            <input type="range" id="mutationrate" name="mutationrate" min="0" max="1" value="0.5" step="0.01" />
+            <span class="input-title">(<output id="mutationlabel"></output>)</span>
+        </div>
+        
+    </div>
+    <div class="mt">
+        <label for="gensize" class="input-title">Размер поколения:</label>
+        <div class="named-input">
+            <input type="range" id="gensize" name="gensize" min="10" max="5000" value="100" step="5" />
+            <span class="input-title">(<output id="gensizelabel"></output>)</span>
+        </div>
+    </div>
+    <div class="mt">
+        <label for="stopsize" class="input-title">Количество плохих поколений для остановки:</label>
+        <div class="named-input">
+            <input type="range" id="stopsize" name="stopsize" min="10" max="1000" value="300" step="1" />
+            <span class="input-title">(<output id="stopsizelabel"></output>)</span>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="mt">
+    <span class="block-title">Состояние</span>
+    <div class="states">
+        <span class="input-title" id="numVertexes">Количество вершин: </span>
+        <span class="input-title" id="numEdges">Количество ребер: </span>
     </div>
     <div class="states">
-        <span id="stateWorking">Состояние алгоритма: <br>спит</span>
-        <span id="stateBest">Лучшая дистанция: </span>
+        <span class="input-title" id="stateWorking">Состояние алгоритма: <br>спит</span>
+        <span class="input-title" id="stateBest">Лучшая дистанция: </span>
     </div>
-    <div class="controlparams">
-        <label for="mutationrate">Шанс мутации: <output id="mutationlabel"></output></label>
-        <input type="range" id="mutationrate" name="mutationrate" min="0" max="1" value="0.5" step="0.01" />
-        <label for="gensize">Размер поколения: <output id="gensizelabel"></output></label>
-        <input type="range" id="gensize" name="gensize" min="10" max="5000" value="100" step="5" />
-        <label for="stopsize">Количество плохих поколений для остановки: <output id="stopsizelabel"></output></label>
-        <input type="range" id="stopsize" name="stopsize" min="10" max="1000" value="300" step="1" />
-    </div>
-    <div class="controlbutttons">
-        <button id="start" class="button button-green">Начать</button>
-        <button id="stop" class="button button-yellow">Приостановить</button>
-        <button id="reset" class="button button-red">Очистить все</button>
-    </div>
+</div>
+<hr>
+<div class="buttons-flex">
+    <button id="start" class="button button-green button-flex">Начать</button>
+    <button id="stop" class="button button-yellow button-flex">Приостановить</button>
+</div>
+<div class="buttons-flex mt">
+    <button id="reset" class="button button-red button-flex">Очистить</button>
 </div>
 {% endblock %}
 

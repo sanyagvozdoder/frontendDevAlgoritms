@@ -18,30 +18,41 @@
 {% block controls %}
 <div class="mt">
     <span class="block-title">Генератор</span>  
-    <span class="input-title">Размер:</span>
-    <input id="map-size" type="number" class="w-100" value="9" step="2" min="9" max="29"/><br>
-    <span class="input-title">Лабиринт:</span>
-    <input id="maze-toggle" type="checkbox" class="w-100"/><br>
+    <div class="named-input">
+        <span class="input-title">Размер:</span>
+        <input id="map-size" type="number" class="w-100" value="9" step="2" min="9" max="29"/><br>
+    </div>
+    <div class="named-input">
+        <span class="input-title">Лабиринт:</span>
+        <input id="maze-toggle" type="checkbox" class="w-100"/><br>
+    </div>
+    <div class="buttons-flex mt">
+        <button id="generate-btn" class="button button-light button-flex">Перегенерировать</button>
+    </div>
 </div>
+<hr>
 <div class="mt">
     <span class="block-title">Отображение</span>  
-    <span class="input-title">Просматриваемые клетки:</span>
-    <input id="show-path-toggle" type="checkbox" checked class="w-100"/><br>
-    <span class="input-title">Анимации:</span>
-    <input id="use-anim-toggle" type="checkbox" checked class="w-100"/><br>
+    <div class="named-input">
+        <span class="input-title">Просматриваемые клетки:</span>
+        <input id="show-path-toggle" type="checkbox" checked class="w-100"/><br>
+    </div>
+    <div class="named-input">
+        <span class="input-title">Анимации:</span>
+        <input id="use-anim-toggle" type="checkbox" checked class="w-100"/><br>
+    </div>
 </div>
 <hr>
 <div class="mt buttons-flex">
-    <button id="generate-btn" class="button button-flex">Перегенерировать</button>
     <select id="tool-select" class="button button-green button-flex">
         <option value="0">Установка цели</option>
         <option value="1">Изменение карты</option>
         <option value="2">Установка т. респавна</option>
-    </select><br>
+    </select>
+    <button id="respawn-btn" class="button button-yellow button-flex">Респавн</button>
 </div>
 <div class="mt buttons-flex">
-    <button id="clear-btn" class="button button-light button-flex">Очистить путь</button>
-    <button id="respawn-btn" class="button button-yellow button-flex">Респавн</button>
+    <button id="clear-btn" class="button button-red button-flex">Очистить путь</button>
 </div>
 {% endblock %}
 

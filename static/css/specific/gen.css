@@ -14,18 +14,19 @@
     /*background-color: white;*/
 }
 
-.constantsOfGraph{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-grow:0.2;
+input {
+    margin: 0;
+    padding: 0;
 }
 
 .states{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    flex-grow:0.2;
+}
+
+.states > span {
+    display: flex;
+    flex-grow:1;
 }
 
 .controlparams{

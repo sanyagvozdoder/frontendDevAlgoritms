@@ -2,7 +2,6 @@
 
 {% block title %}Нейронная сеть{% endblock %}
 {% block extra_styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/specific/nn.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons') }}">
 {% endblock %}
 
@@ -10,11 +9,23 @@
 <script type="module" src="{{ url_for('static', filename='js/algorithms/canvasDrawing.js') }}"></script>
 {% endblock %}
 
-{% block details %}
-    <div class="painter t-center">
-        <canvas class="canvas" id="canvas" width="500" height="500"></canvas><br>
-        <button id="get" class="calculate button button-green">Guess</button>
-        <button id="clear" class="button button-red">Clear</button>
-        <p id="output" class="output"></p>
-    </div>
+{% block visualization %}
+<div class="canvas-container">
+    <canvas class="field" id="canvas" width="500" height="500"></canvas>
+</div>
+{% endblock %}
+
+{% block controls %}
+<span class="block-title">Состояние</span>
+<span class="input-title">Результат: </span><span id="output">&lt;ничего&gt;</span></span>
+<hr>
+<div class="buttons-flex">
+    <button id="get" class="calculate button button-green button-flex">Распознать</button>
+    <button id="clear" class="button button-red button-flex">Очистить</button>
+</div>
+{% endblock %}
+
+
+{% block info %}
+Нарисуйте на полотне цифру и нажмите зелёную кнопку. Нейросеть попробует распознать то, что вы нарисовали. Результат работы нейросети можно увидеть в разделе "состояние".
 {% endblock %}

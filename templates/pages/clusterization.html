@@ -18,19 +18,33 @@
 
 {% block controls %}
 <div class="mt">
-    <span class="input-title">Количество кластеров:</span>
-    <input id="clustersAmount" type="number" class="w-100" value="3" step="1" min="1" max="100" />
-    <button class="button" style="width: 100%;" id="kMeansActivate">Метод К-средних</button><br><br>
-    <button class="button" style="width: 100%;" id="hierarchicalActivate">Иерархический</button><br><br>
-    <button class="button" style="width: 100%;" id="kMedoidsActivate">k-medoid</button><br><br>
-    <button class="button button-red" style="width: 100%;" id="goslingCSS">очистить</button>
+    <span class="block-title">Настройка</span>
+    <div class="named-input">
+        <span class="input-title">Количество кластеров:</span>
+        <input id="clustersAmount" type="number" class="w-100" value="3" step="1" min="1" max="100" />
+    </div>
+    <hr>
+    <div class="buttons-flex">
+        <button class="button button-green button-flex" style="width: 100%;" id="kMeansActivate">К-средних</button>
+        <button class="button button-green button-flex" style="width: 100%;" id="hierarchicalActivate">Иерархический</button>
+    </div>
+    <div class="buttons-flex mt">
+        <button class="button button-green button-flex" style="width: 100%;" id="kMedoidsActivate">К-метоид</button>
+        <button class="button button-red button-flex" id="goslingCSS">Очистить</button>
+    </div>
 </div>
 
 
 {% endblock %}
 
 {% block info %}
-Вы расставляете точки на холсте, затем алгоритм распределяет эти точки по кластерам. Доступно 3 алгоритма:
-К-средних(верхняя часть точки), иерархический(средняя) и К-медоид(нижняя). Также есть возможность выбрать на какое
-количество кластеров вы хотите распределить точки. Количество кластеров не может больше количества точек.
+Вы расставляете точки на холсте, затем алгоритм распределяет эти точки по кластерам. 
+<hr>
+Доступно 3 алгоритма, принадлежность к определенному кластеру обозначена цветом в соответствующей части точки:
+<ul>
+    <li>К-средних - верхняя часть</li>
+    <li>Иерархический - средняя часть</li>
+    <li>К-медоид - нижняя часть</li>
+</ul>
+Так же, вы можете выбрать количество кластеров, на которое хотите разбить точки. Количество кластеров не может больше количества точек.
 {% endblock %}
