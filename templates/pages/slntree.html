@@ -48,57 +48,6 @@
 {% block info %}
 {% endblock %}
 
-{% block ggg %}
-
-<p>
-    <b>Дерево принятия решений</b> - средство поддержки принятия решений, использующееся в машинном обучении, анализе данных и статистике. 
-    <a class="link mt" href="https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE_%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B9">
-        Википедия
-    </a>
-</p>
-
-<div class="mt">
-    <br>
-    <h1>Конфигурация</h1>
-    <h3>Обучающая выборка (Формат - CSV, разделитель - точка с запятой ";")</h3>
-    <div class="mt">
-      <span>Названия характеристик</span>
-      <input id="tr_columns" style="width: 100%;" />
-    </div>
-    <div class="mt">
-      <span>Содержание</span>
-      <textarea id="tr_data"></textarea>
-    </div>
-    <hr>
-    <div class="mt">
-      <span>Искомая характеристика</span>
-      <input id="cfg_column" style="width: 100%;" />
-    </div>
-    <div class="mt">
-      <span>Игнорируемые характеристики</span>
-      <input id="cfg_ignore_columns" style="width: 100%;" />
-    </div>
-    <div class="mt">
-      <button class="button button-green" id="generate">Построить дерево</button>
-    </div>
-    <hr>
-    <div class="mt">
-      <span>Известные значения (оставьте прочерк "-" там, где значение не известно)</span>
-      <input id="decision_info" style="width: 100%;" />
-    </div>
-    <div class="mt">
-      <button class="button button-green" id="decide">Вынести вердикт</button>
-      <span id="decision"></span>
-    </div>
-</div>
-<hr>
-<!-- src https://codepen.io/rahmatrudianto/pen/VwXEQZo -->
-<h1>Дерево</h1>
-<div class="tree-block">
-  <div class="tree" id="decision-tree-parent"></div>
-</div>
-{% endblock %}
-
 {% block extra_scripts %}
 <script  type="text/javascript" src="{{ url_for('static', filename='js/algorithms/slntree.js') }}"></script>
 {% endblock %}

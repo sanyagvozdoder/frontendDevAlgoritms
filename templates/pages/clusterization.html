@@ -7,25 +7,30 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script  type="module" src="{{ url_for('static', filename='js/algorithms/clusterization.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/algorithms/clusterization.js') }}"></script>
 {% endblock %}
 
-{% block details %}
-<p class="mt">
-     Кластеризация (англ. cluster analysis) — задача группировки множества объектов на подмножества (кластеры) таким образом, чтобы объекты из одного кластера были более похожи друг на друга, чем на объекты из других кластеров по какому-либо критерию.
-    <br>
-    <a href="https://neerc.ifmo.ru/wiki/index.php?title=%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F" class="link mt" target="_blank">Викиконспекты</a>
-</p>
+{% block visualization %}
 <div class="t-center">
-    <canvas id="paintCanvas" width="1000" height="500" style="border: 1px solid black; background-color: white;";></canvas>
+    <canvas id="paintCanvas" width="952" height="610" style="background-color: white" ;></canvas>
 </div>
-<div class="t-center">
-    <input id="clustersAmount" type="number" class="w-100" value="3" step="1" min="1" max="100"/>
-    <button class = "button" id = "kMeansActivate">Метод К-средних</button>
-    <button class = "button" id = "hierarchicalActivate">Иерархический</button>
-    <button class = "button" id = "kMedoidsActivate">k-medoid</button>
-    <button class = "button button-red" id = "goslingCSS">очистить</button>
+{% endblock %}
+
+{% block controls %}
+<div class="mt">
+    <span class="input-title">Количество кластеров:</span>
+    <input id="clustersAmount" type="number" class="w-100" value="3" step="1" min="1" max="100" />
+    <button class="button" style="width: 100%;" id="kMeansActivate">Метод К-средних</button><br><br>
+    <button class="button" style="width: 100%;" id="hierarchicalActivate">Иерархический</button><br><br>
+    <button class="button" style="width: 100%;" id="kMedoidsActivate">k-medoid</button><br><br>
+    <button class="button button-red" style="width: 100%;" id="goslingCSS">очистить</button>
 </div>
 
 
+{% endblock %}
+
+{% block info %}
+Вы расставляете точки на холсте, затем алгоритм распределяет эти точки по кластерам. Доступно 3 алгоритма:
+К-средних(верхняя часть точки), иерархический(средняя) и К-медоид(нижняя). Также есть возможность выбрать на какое
+количество кластеров вы хотите распределить точки. Количество кластеров не может больше количества точек.
 {% endblock %}

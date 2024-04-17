@@ -35,7 +35,7 @@ canvas.addEventListener('click', draw);
 function clear(context) {
     points = []
     context.fillStyle = "white"
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 
@@ -106,7 +106,7 @@ function kMeanClusterizationOnCanvas(points, context) {
     let size = parseInt(document.getElementById("clustersAmount").value);
     if (size >  points.length)
     {
-        alert("Вы поствили меньше ${size} точек");
+        alert(`Вы поствили меньше ${size} точек`);
         return;
     }
     let color;
@@ -151,7 +151,7 @@ function hierarchicalClusterizationOnCanvas(points, context) {
     let size = parseInt(document.getElementById("clustersAmount").value);
     if (size >  points.length)
     {
-        alert("Вы поствили меньше ${size} точек")
+        alert(`Вы поствили меньше ${size} точек`)
         return;
     }
 
@@ -240,7 +240,7 @@ function kMedoidsClusterizationOnCanvas(points, context) {
 
     if (size >  points.length)
     {
-        alert("Вы поствили меньше ${size} точек")
+        alert(`Вы поствили меньше ${size} точек`)
         return;
     }
     let color;
