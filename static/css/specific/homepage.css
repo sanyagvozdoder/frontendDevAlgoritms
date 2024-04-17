@@ -1,5 +1,6 @@
 .background {
-    padding: 75px;
+    padding: 25px;
+    padding-left: 75px;
     display: block;
     opacity: 1;
     text-align: center;
@@ -10,6 +11,26 @@
     height: 100%;
     position: relative;
     overflow: hidden;
+    opacity: 0.7;
+
+    box-shadow: inset 0 0 100px rgb(0, 0, 0)
+}
+
+.additional {
+  color: white;
+  opacity: 0.8;
+  font-size: 10pt;
+  font-weight: lighter;
+  font-style: italic;
+}
+
+.drawing-content {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid white;
+  padding: 75px;
+  padding-left: 25px;
+  height: 100%;
 }
 
 .background:before {
@@ -20,129 +41,56 @@
     top: -50%;
     left: -50%;
     z-index: -1;
-    background-size: 60px 60px;
+    background-size: 40px 40px;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
     background-color: #105992;
-    transform: rotate(10deg);
+    background-color: #0091ff;
+    transform: rotate(5deg);
 }
 
-.tiles {
-    display: flex;
-    flex-direction: column;
+ul {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
-.tiles > div {
-    display: flex;
-    flex-direction: row;
-    flex: auto;
+li {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 0;
+  flex-grow: 1;
+  justify-content: center;
+
+  list-style-type: none;
+  margin-bottom: 10px;
+  font-size: 14pt;
+  font-weight: bolder;
+
+  border: 1px solid rgba(255, 255, 255, 0.474);
+  border-radius: 10px;
+  opacity: 0.9;
+  background-color: #0095ff;
+  box-shadow:  0 0 15px #0911a176, 0 0 25px rgba(0, 0, 0, 0.212);
+  transition: ease-in-out 0.1s;
 }
 
-.tiles > div > div {
-    display: flex;
-    flex: auto;
-    background-color: rgb(53, 121, 198);
-    border-radius: 15px;
-    min-height: 300px;
-    box-shadow: 0 0 5px rgba(0, 149, 255, 0.6);
-    margin: 5px  0 0 5px;
+li:hover {
+  opacity: 1;
+  font-size: 16pt;
+  font-weight: bold;
+  padding: 1px;
+  transition: ease-in-out 0.1s;
 }
 
-.tiles > div:first-child {
-    margin: 0;
+li > a, li > a:visited {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+
+  text-decoration: none;
+  color: white;
+
+  padding: 12pt;
+  width: 100%;
 }
-
-.hpTitle{
-    color: white;
-    -webkit-text-stroke: #8c35c5 3px;
-    font-size: 100px;
-
-    backdrop-filter: blur(8px);
-    font-family: Impact, fantasy;
-
-}
-
-.slideshow-container {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
-  }
-  
-  /* Hide the images by default */
-  .mySlides {
-    display: none;
-    background-color: rgb(53, 121, 198);
-  }
-  
-  /* Next & previous buttons */
-  .prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-  }
-  
-  /* Position the "next button" to the right */
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-  }
-  
-  /* On hover, add a black background color with a little bit see-through */
-  .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
-  }
-  
-  /* Caption text */
-  .text {
-    color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  /* Number text (1/3 etc) */
-  .numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-  }
-  
-  /* The dots/bullets/indicators */
-  .dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-  }
-  
-  .active, .dot:hover {
-    background-color: #717171;
-  }
-  
-  /* Fading animation */
-  .fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-  }
-  
-  @keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-  }
