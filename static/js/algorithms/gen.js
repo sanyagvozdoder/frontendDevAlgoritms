@@ -2,14 +2,40 @@ const canvas = document.getElementById('canvas')
 const context = canvas.getContext("2d")
 
 let points = []
+let isTerminate = false
+let isStop = false
 
 context.strokeStyle = "black"
-context.lineWidth = 4
+context.lineWidth = 5
 context.lineCap = 'round'
 const vertexSize = 10
 
 context.fillStyle = "white"
 context.fillRect(0,0,1000,750)
+
+let labelmut = document.getElementById("mutationlabel")
+let mutrate = document.getElementById("mutationrate")
+labelmut.textContent = mutrate.value
+
+mutrate.addEventListener("input", (event) => {
+    labelmut.textContent = event.target.value
+})
+
+let labelgen = document.getElementById("gensizelabel")
+let gensize = document.getElementById("gensize")
+labelgen.textContent = gensize.value
+
+gensize.addEventListener("input", (event) => {
+    labelgen.textContent = event.target.value
+})
+
+let labelstop = document.getElementById("stopsizelabel")
+let stopsize = document.getElementById("stopsize")
+labelstop.textContent = stopsize.value
+
+stopsize.addEventListener("input", (event) => {
+    labelstop.textContent = event.target.value
+})
 
 function distanceBetween(pointA, pointB)
 {
@@ -25,18 +51,26 @@ function draw(event)
         const y = event.clientY - canvas.offsetTop
         
         context.fillStyle = "black"
-        context.fillRect(x, y, vertexSize, vertexSize)
+        context.beginPath()
+        context.arc(x, y, 10, 0, Math.PI * 2);
+        context.fill()
 
         context.strokeStyle = "rgba(0, 0, 0, 1)"
 
         points.forEach(point=>{
             context.beginPath()
-            context.moveTo(point.x+vertexSize/2,point.y+vertexSize/2)
-            context.lineTo(x + vertexSize/2,y + vertexSize/2)
+            context.moveTo(point.x,point.y)
+            context.lineTo(x,y)
             context.stroke()
         })
 
         points.push({ x, y })
+
+        let vertState = document.getElementById("numVertexes")
+        let edgesState = document.getElementById("numEdges")
+
+        vertState.innerHTML = "Количество вершин: " + points.length
+        edgesState.innerHTML = "Количество ребер: " + points.length*(points.length-1)/2
     }
 }
 
@@ -83,14 +117,14 @@ function pickRandomProb(prob){
 function drawPath(bestPath){
     for (let i = 0; i < bestPath.length - 1; i++) {
         context.beginPath()
-        context.moveTo(points[bestPath[i]].x + vertexSize/2,points[bestPath[i]].y + vertexSize/2)
-        context.lineTo(points[bestPath[i+1]].x + vertexSize/2,points[bestPath[i+1]].y + vertexSize/2)
+        context.moveTo(points[bestPath[i]].x,points[bestPath[i]].y)
+        context.lineTo(points[bestPath[i+1]].x,points[bestPath[i+1]].y)
         context.stroke()
     }
 }
 
 function mutate(path){
-    if(Math.random(1) > 0.5){
+    if(Math.random(1) > 1 - parseInt(labelgen.textContent)){
         let index1 = Math.floor(Math.random() * (path.length - 2) + 1)
 
         let index2 = 0
@@ -189,18 +223,30 @@ class Generation{
     }
 }
 
+async function waitState() {
+
+    return new Promise(resolve=>{
+        let timer = setInterval(checkState, 10)
+    
+        function checkState() {
+            if (isStop == false) {
+                clearInterval(timer)
+                resolve(!isStop)
+            }
+        }
+    })
+}
+
 async function start(){
     canvas.dataset.disable = "true"
 
-    let vertState = document.getElementById("numVertexes")
-    let edgesState = document.getElementById("numEdges")
-
-    vertState.innerHTML += points.length
-    edgesState.innerHTML += points.length*(points.length-1)/2
+    let bestState = document.getElementById("stateBest")
+    let algoState = document.getElementById("stateWorking")
+    algoState.innerHTML = 'Состояние алгоритма:<br> работает'
 
     let arr = []
 
-    for(let i = 0;i<points.length * 2;i++){
+    for(let i = 0;i<parseInt(labelgen.textContent);i++){
         let ph = fillingRand()
         let ind = new Individ(ph)
 
@@ -213,21 +259,28 @@ async function start(){
     let bestIndivid = curGen.bestInd
     let bestIndDist = curGen.bestDist
 
-    while(counterForEsc<500){
+    while(counterForEsc<parseInt(labelstop.textContent) && !isTerminate){
         context.strokeStyle = "rgba(175, 175, 175, 1)"
 
         for (let i = 0; i < points.length-1; i++) {
             for (let j = i+1; j < points.length; j++) {
                 context.beginPath()
-                context.moveTo(points[i].x + vertexSize/2,points[i].y + vertexSize/2)
-                context.lineTo(points[j].x + vertexSize/2,points[j].y + vertexSize/2)
+                context.moveTo(points[i].x,points[i].y)
+                context.lineTo(points[j].x,points[j].y)
                 context.stroke()
             }
         }
 
-        context.strokeStyle = "rgba(0, 175, 254, 1)"
+        context.strokeStyle = "rgba(0, 175, 255, 1)"
 
         drawPath(curGen.bestInd)
+
+        for (let pnt = 0; pnt < points.length; pnt++) {
+            context.fillStyle = "black"
+            context.beginPath()
+            context.arc(points[pnt].x, points[pnt].y, 10, 0, Math.PI * 2);
+            context.fill()
+        }
 
         await new Promise(r => setTimeout(r, 1))
 
@@ -245,7 +298,6 @@ async function start(){
         }
 
         curGen = new Generation(arrInds)
-        console.log(curGen)
 
         if(bestIndDist > curGen.bestDist){
             bestIndDist = curGen.bestDist
@@ -255,6 +307,14 @@ async function start(){
         else{
             counterForEsc++
         }
+
+        bestState.innerHTML = "Лучшая дистанция: " + Math.floor(bestIndDist)
+
+        if(isStop){
+            algoState.innerHTML = "Состояние алгоритма: <br>приостановлен"
+            let state = await waitState()
+            algoState.innerHTML = "Состояние алгоритма: <br>работает"
+        }
     }
 
     context.strokeStyle = "rgba(175, 175, 175, 1)"
@@ -262,23 +322,43 @@ async function start(){
     for (let i = 0; i < points.length-1; i++) {
         for (let j = i+1; j < points.length; j++) {
             context.beginPath()
-            context.moveTo(points[i].x + vertexSize/2,points[i].y + vertexSize/2)
-            context.lineTo(points[j].x + vertexSize/2,points[j].y + vertexSize/2)
+            context.moveTo(points[i].x,points[i].y)
+            context.lineTo(points[j].x,points[j].y)
             context.stroke()
         }
         
     }
 
-    context.strokeStyle = "rgba(0, 175, 254, 1)"
+    context.strokeStyle = "rgba(0, 175, 255, 1)"
 
     drawPath(bestIndivid)
 
-    console.log(bestIndDist)
+    for (let pnt = 0; pnt < points.length; pnt++) {
+        context.fillStyle = "black"
+        context.beginPath()
+        context.arc(points[pnt].x, points[pnt].y, 10, 0, Math.PI * 2);
+        context.fill()
+    }
+
+    algoState.innerHTML = "Состояние алгоритма: <br>завершился"
+    bestState.innerHTML = "Итоговый рузельтат: " + Math.floor(bestIndDist)
 }
 
 function reset(){
+    isTerminate = true
+    isStop = false
+
+    let btnStop = document.getElementById('stop')
+    btnStop.innerHTML = "Приостановить"
+
     canvas.dataset.disable = "false"
     points = []
+
+    let algoState = document.getElementById("stateWorking")
+    algoState.innerHTML = "Состояние алгоритма: <br>спит"
+
+    let bestState = document.getElementById("stateBest")
+    bestState.innerHTML = "Лучшая дистанция: "
 
     let vertState = document.getElementById("numVertexes")
     let edgesState = document.getElementById("numEdges")
@@ -288,6 +368,20 @@ function reset(){
 
     context.fillStyle = "white"
     context.fillRect(0,0,1000,750)
+
+    isTerminate = false
+}
+
+async function stopping() {
+    isStop = !isStop
+
+    if(isStop){
+        let btnStop = document.getElementById('stop')
+        btnStop.innerHTML = "Продолжить"
+    }
+    else{
+        btnStop.innerHTML = "Приостановить"
+    }
 }
 
 let btnStart = document.getElementById("start")
@@ -295,4 +389,7 @@ btnStart.addEventListener('click',start)
 
 let btnReset = document.getElementById("reset")
 btnReset.addEventListener('click',reset)
+
+let btnStop = document.getElementById('stop')
+btnStop.addEventListener('click',stopping)
 

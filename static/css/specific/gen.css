@@ -12,19 +12,39 @@
 }
 
 .controller{
+    width:100%;
+    height:100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-}
-
-.controlbutttons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-content:flex-start;
 }
 
 .constantsOfGraph{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-grow:0.2;
+}
+
+.states{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-grow:0.2;
+}
+
+.controlparams{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow:0.5;
+}
+
+.controlbutttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-grow: 1;
+    padding-top: 20px;
 }

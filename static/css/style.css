@@ -61,15 +61,16 @@ body {
 }
 
 .algocontrol {
-    overflow-y: auto;
+    overflow-y: hidden;
     width: 450px;
     background-color: rgba(146, 150, 153, 0.288);
-    overflow: auto;
 }
 
 .algocontrol-content {
     padding: 10px 20px;
-    overflow: auto;
+    height:100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .tabs {
@@ -98,8 +99,10 @@ body {
 
 /* https://www.w3schools.com/howto/howto_js_tabs.asp */
 .tab-content {
-animation: fadeEffect 1s; /* Fading effect takes 1 second */
-text-wrap: wrap;
+    width:100%;
+    height:100%;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+    text-wrap: wrap;
 }
   
 /* Go from zero to full opacity */
