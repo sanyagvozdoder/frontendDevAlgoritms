@@ -1,16 +1,54 @@
 .background {
-    background-image: url(../../img/homepageBG.jpg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    width: 100%;
-    aspect-ratio: 1;
-    padding: 10rem;
+    padding: 75px;
     display: block;
     opacity: 1;
-    position: relative;
     text-align: center;
     transition: 1000ms ease-in-out;
     color: white;
+
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.background:before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+    background-size: 60px 60px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+    background-color: #105992;
+    transform: rotate(10deg);
+}
+
+.tiles {
+    display: flex;
+    flex-direction: column;
+}
+
+.tiles > div {
+    display: flex;
+    flex-direction: row;
+    flex: auto;
+}
+
+.tiles > div > div {
+    display: flex;
+    flex: auto;
+    background-color: rgb(53, 121, 198);
+    border-radius: 15px;
+    min-height: 300px;
+    box-shadow: 0 0 5px rgba(0, 149, 255, 0.6);
+    margin: 5px  0 0 5px;
+}
+
+.tiles > div:first-child {
+    margin: 0;
 }
 
 .hpTitle{
@@ -22,3 +60,89 @@
     font-family: Impact, fantasy;
 
 }
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }
+  
+  /* Hide the images by default */
+  .mySlides {
+    display: none;
+    background-color: rgb(53, 121, 198);
+  }
+  
+  /* Next & previous buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+  
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+  
+  /* Caption text */
+  .text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Number text (1/3 etc) */
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+  
+  /* The dots/bullets/indicators */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+  .active, .dot:hover {
+    background-color: #717171;
+  }
+  
+  /* Fading animation */
+  .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+  
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
