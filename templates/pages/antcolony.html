@@ -7,23 +7,32 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script  type="module" src="{{ url_for('static', filename='js/algorithms/antcolony.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/algorithms/antcolony.js') }}"></script>
 {% endblock %}
 
 
-{% block details %}
-<p class="mt">
-    Муравьиный алгоритм — один из эффективных полиномиальных алгоритмов для нахождения приближённых решений задачи коммивояжёра, а также решения аналогичных задач поиска маршрутов на графах.
-   <br>
-   <a href="https://ru.wikipedia.org/wiki/%D0%9C%D1%83%D1%80%D0%B0%D0%B2%D1%8C%D0%B8%D0%BD%D1%8B%D0%B9_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC" class="link mt" target="_blank">Википедия</a>
-</p>
-
+{% block visualization %}
 <div class="t-center">
-    <canvas id="paintCanvas" width="900" height="600" style="border: 3px solid #8c35c5; background-color: black;";></canvas>
+    <canvas id="canvas" width="952" height="610" style="background-color: white;" ;></canvas>
 </div>
+{% endblock %}
 
-<button class = "button" id = "drawColonies">Расположить колонии</button>
-<button class = "button" id = "drawWalls">Расположить стены</button>
-<button class = "button" id = "drawFood">Расположить источники пищи</button>
-<button class = "button button-red" id = "goslingCSS">очистить</button>
+
+{% block controls %}
+<div class="mt">
+    <span class="input-title">Скорость анимации:</span><br>
+    <input id="speed" type="range" step="10" list="volsettings" max="200" value="100" min="0"><br><br>
+    <span class="input-title">Количество муравьёв:</span><br>
+    <input id="antAmount" type="range" step="1" list="volsettings" max="100" value="25" min="1"><br><br>
+    <span class="input-title">Количество итераций:</span><br>
+    <input id="iterationsAmount" type="range" step="100" list="volsettings" max="10000" value="1000" min="100"><br><br>
+    <button class="button" style="width:100%" id="goslingCSS">Начать</button><br><br>
+    <button class="button" style="width:100%" id="stop">Остановить</button><br><br>
+    <button class="button button-red" style="width:100%" id="clear">Очистить</button><br><br>
+</div>
+{% endblock %}
+
+{% block info %}
+Вы расставляете точки на холсте, которые обозначают вершины графа. При запкуске алгоритма "муравьи" начинают пробегать
+по вершинам, оставляя феромоны. Вы можете выбрать количество муравьёв, скорость анимации и количество итераций.
 {% endblock %}
