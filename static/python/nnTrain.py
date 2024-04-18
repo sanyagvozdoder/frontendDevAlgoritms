@@ -1,8 +1,21 @@
 import numpy as np
 import cv2
+from scipy.ndimage import center_of_mass
 
-filePath = "C:\\Users\\user\\Desktop\\testsfornn\\mnist_train.csv"
-data = np.genfromtxt(filePath, delimiter=',')
+def shift(img,sx,sy):
+    rows,cols = img.shape
+    M = np.float32([[1,0,sx],[0,1,sy]])
+    shifted = cv2.warpAffine(img,M,(cols,rows))
+    return shifted
+
+def getBestShift(img):
+    cx, cy = center_of_mass(img)
+
+    rows,cols = img.shape
+    shiftx = np.round(cols/2.0-cx).astype(int)
+    shifty = np.round(rows/2.0-cy).astype(int)
+
+    return shiftx,shifty
 
 def loss(predictions, targets):
     return -np.sum(np.log(predictions + 10**-100) * targets)
@@ -25,7 +38,7 @@ class NeuralNetwork:
         self.inputSize = inputSize
         self.hiddenSize = hiddenSize
         self.outputSize = outputSize
-        self.learningRate = 0.0001
+        self.learningRate = 0.01
 
         self.hiddenLayer = Layer(self.inputSize, self.hiddenSize)
         self.outputLayer = Layer(self.hiddenSize, self.outputSize)
@@ -67,44 +80,68 @@ class NeuralNetwork:
             self.backPropagation(targets)
             print("Epoch: ",epoch," Loss: ", loss(self.outputLayer.output,targets))
 
-nn = NeuralNetwork(2500, 1500, 10)
+nn = NeuralNetwork(2500, 1250, 10)
 
-data = np.array(data)
-rows,cols = data.shape
-np.random.shuffle(data)
+path = open("C:\\Users\\user\\Desktop\\testsfornn\\mnist_train.csv", )
+data = np.genfromtxt(path, delimiter=',').T
 
-train_answers = data.T[0]
-pxTrain = data.T[1:cols]
+train_data = data[1:].T
+train_answers = data[0]
 
-train_data = [[]*2500 for _ in range(60000)]
+casted_train_data = []
 
-for i in range(pxTrain.shape[1]):
-    temp_data = []
-    temp_data.append(cv2.resize(pxTrain[:,i], (50, 50)))
+for index in range(60000):
+    pic = train_data[index]
 
-    for j in range(50):
-        for k in range(50):
-            train_data[i].append(temp_data[0][j][k])
+    pic2d = np.array([[0.0] * 28 for _ in range(28)])
 
+    for i in range(28):
+        for j in range(28):
+            pic2d[i][j] = pic[i * 28 + j]
 
-train_data = np.array(train_data).T
+    while np.sum(pic2d[0]) == 0:
+        pic2d = pic2d[1:]
+    while np.sum(pic2d[:, 0]) == 0:
+        pic2d = np.delete(pic2d, 0, 1)
+    while np.sum(pic2d[-1]) == 0:
+        pic2d = pic2d[:-1]
+    while np.sum(pic2d[:, -1]) == 0:
+        pic2d = np.delete(pic2d, -1, 1)
+
+    pic2d = cv2.resize(pic2d, (40, 40), interpolation=cv2.INTER_LINEAR) / 255.0
+
+    picToSet = [[0.0] * 50 for _ in range(50)]
+
+    for i in range(5, 45):
+        for j in range(5, 45):
+            picToSet[i][j] = pic2d[i - 5][j - 5]
+
+    shiftx, shifty = getBestShift(np.array(picToSet))
+    shifted = shift(np.array(picToSet), shiftx, shifty)
+    picToSet = shifted
+
+    pic1d = [0.0] * 2500
+
+    for i in range(50):
+        for j in range(50):
+            pic1d[i * 50 + j] = picToSet[i][j]
+
+    casted_train_data.append(pic1d)
+
+casted_train_data = np.array(casted_train_data).T
+
 
 for i in range(60000):
-    inputs = train_data[:,i]
+    inputs = casted_train_data[:,i]
     targetsCreate = lambda x: [1 if j == x else 0 for j in range(10)]
     targets = targetsCreate(train_answers[i])
-    nn.train(inputs,targets,3)
+    nn.train(inputs,targets,5)
     print("Try: ",i)
-
 
 cnt = 0
 
-train_answers = train_answers[0:1000]
-train_data = train_data[:,0:1000]
-
-
-for i in range(1000):
-    inputs = train_data[:,i]
+for i in range(5000):
+    inputs = casted_train_data[:,i]
     answerNN = nn.answer(inputs)
 
     if(train_answers[i] == answerNN):
@@ -115,43 +152,7 @@ for i in range(1000):
 
     print("Correct: ", train_answers[i]," Answer: ", answerNN)
 
-print("Accuracy: ", (cnt/(rows-5000)) * 100)
-
-file = open("C:\\Users\\user\\Desktop\\weights\\wandb.txt","w")
-
-file.write("Скрытый Слой\n")
-file.write("Веса\n")
-
-for i in range(nn.inputSize):
-    for j in range(nn.hiddenSize):
-        file.write(str(nn.hiddenLayer.weights[i][j]))
-        file.write("\n")
-
-file.write("Отступы\n")
-
-for i in range(nn.hiddenSize):
-    file.write(str(nn.hiddenLayer.biases[0][i]))
-    file.write("\n")
-
-file.write("Выходной Слой\n")
-file.write("Веса\n")
-
-for i in range(nn.hiddenSize):
-    for j in range(nn.outputSize):
-        file.write(str(nn.hiddenLayer.weights[i][j]))
-        file.write("\n")
-
-file.write("Отступы\n")
-
-for i in range(nn.outputSize):
-    file.write(str(nn.hiddenLayer.biases[0][i]))
-    file.write("\n")
-
-
-
-
-
-
+print("Accuracy: ", (cnt/(5000)) * 100)
 
 
 
