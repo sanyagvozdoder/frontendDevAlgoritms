@@ -3,6 +3,7 @@
 {% block title %}Нейронная сеть{% endblock %}
 {% block extra_styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/specific/nn.css') }}">
 {% endblock %}
 
 {% block extra_scripts %}
@@ -16,13 +17,37 @@
 {% endblock %}
 
 {% block controls %}
+<span class="block-title">Настройка полотна</span>
+<label for="brushsize" class="input-title">Размер кисти:</label>
+    <div class="named-input">
+        <input type="range" id="brushsize" name="brushsize" min="15" max="50" value="25" step="1" />
+        <span class="input-title">(<output id="brushsizelabel"></output>)</span>
+    </div>
+<button class="button button-flex button-yellow" id="switcher">Переключиться на ластик</button>
+
+<hr>
 <span class="block-title">Состояние</span>
-<span class="input-title">Результат: </span><span id="output">&lt;ничего&gt;</span></span>
+<span class="input-title">Результат: </span><span id="output">&lt;ничего&gt;</span>
+<div class="pedestal" id="pedestal">
+    <div class="secplc step">
+        <span class="digit" id="digit2"></span>
+        <span class="percent" id="percent2"></span>
+    </div>
+    <div class="firstplc step">
+        <span class="digit" id="digit1"></span>
+        <span class="percent" id="percent1"></span>
+    </div>
+    <div class="thirdplc step">
+        <span class="digit" id="digit3"></span>
+        <span class="percent" id="percent3"></span>
+    </div>
+</div>
 <hr>
 <div class="buttons-flex">
     <button id="get" class="calculate button button-green button-flex">Распознать</button>
     <button id="clear" class="button button-red button-flex">Очистить</button>
 </div>
+
 {% endblock %}
 
 

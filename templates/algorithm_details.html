@@ -10,12 +10,12 @@
         <div class="algopanel">
           {% block visualization %}{% endblock %}
         </div>
-        <div class="algocontrol">
+        <div class="algocontrol" id="algocontrol">
           <div class="tabs">
             <button class="tab-button" id="controls-btn" onclick="openTab(event, 'controls')">Управление</button>
             <button class="tab-button" onclick="openTab(event, 'info')">Информация</button>
           </div>
-          <div class="algocontrol-content">
+          <div class="algocontrol-content" id="algocontrol-content">
             <div id="controls" class="tab-content">
               {% block controls %}{% endblock %}
             </div>

@@ -4,12 +4,38 @@ const clear = document.getElementById('clear')
 const get = document.getElementById('get')
 
 let isPaint = false
+let isBrush = true
 let prevX = null
 let prevY = null
 
+let labelbrush = document.getElementById("brushsizelabel")
+let brushsize = document.getElementById("brushsize")
+labelbrush.textContent = brushsize.value
+context.lineWidth = labelbrush.textContent
+
+brushsize.addEventListener("input", (event) => {
+    labelbrush.textContent = event.target.value
+    context.lineWidth = labelbrush.textContent
+})
+
+
+function switcher(){
+    isBrush = !isBrush
+
+    if(isBrush){
+        btnSwitch.innerHTML = "Переключиться на ластик"
+        context.strokeStyle = "black"
+    }
+    else{
+        btnSwitch.innerHTML = "Переключиться на кисть"
+        context.strokeStyle = "white"
+    }
+}
+
+let btnSwitch = document.getElementById('switcher')
+btnSwitch.addEventListener('click',switcher)
 
 context.strokeStyle = "black"
-context.lineWidth = 15
 context.lineCap = 'round'
 context.fillStyle = "white"
 context.fillRect(0,0,500,500)
@@ -46,7 +72,26 @@ function getAns() {
             type:"GET",
             success: (response) => {
                 let labelOutput = document.getElementById('output')
-                labelOutput.innerHTML = "" + response
+                labelOutput.innerHTML = "" + response["digits"][0]
+
+                let digit1 = document.getElementById("digit1")
+                let percent1  =document.getElementById("percent1")
+
+                digit1.innerHTML = response["digits"][0]
+                percent1.innerHTML = response["percent"][0] + "%"
+
+                let digit2 = document.getElementById("digit2")
+                let percent2  =document.getElementById("percent2")
+
+                digit2.innerHTML = response["digits"][1]
+                percent2.innerHTML = response["percent"][1] + "%"
+
+                let digit3 = document.getElementById("digit3")
+                let percent3  =document.getElementById("percent3")
+
+                digit3.innerHTML = response["digits"][2]
+                percent3.innerHTML = response["percent"][2] + "%"
+
                 resolve(response)
             },
             error: (response) => {
@@ -59,11 +104,18 @@ function getAns() {
 
 async function requestToServer(){
     const pic = context.getImageData(0,0,500,500)
-    console.log(pic.data)
+
+    document.querySelector('#controls').insertAdjacentHTML('beforeend','<div id="loading"><div class="load" id="load"></div></div>')
+    
+    document.getElementById('controls').style.opacity = "0.4"
 
     await postPic(pic.data).then().catch(e=> console.log(e))
     
     await getAns().then().catch(e=> console.log(e))
+
+    document.getElementById('controls').style.opacity = "1"
+
+    document.getElementById('load').parentNode.removeChild(document.getElementById('load'))
 }
 
 

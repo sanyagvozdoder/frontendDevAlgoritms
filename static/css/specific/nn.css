@@ -1,0 +1,73 @@
+.pedestal{
+    display: flex;
+    width:100%;
+    height:25%;
+    padding-top: 5%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.firstplc{
+    width:30%;
+    height:100%;
+    display:flex;
+    background-color: rgb(255,215,0);
+}
+
+.secplc{
+    width:30%;
+    height:85%;
+    display:flex;
+    align-self: flex-end;
+    background-color: rgb(216,216,216);
+}
+
+.thirdplc{
+    width:30%;
+    height:70%;
+    display:flex;
+    align-self: flex-end;
+    background-color: rgb(160,113,85);
+}
+
+.step{
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.digit{
+    font-size: large;
+    color:black;
+}
+
+.percent{
+    font-size: small;
+    color: black;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to { 
+        transform: rotate(360deg);
+    }
+}
+
+
+.load {
+	width: 100px;
+	height: 100px;
+	margin: 20% auto;
+	border:solid 10px #391ac4;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+    	
+    transition: all 0.5s ease-in;
+    animation-name:             rotate; 
+    animation-duration:         1.0s; 
+    animation-iteration-count:  infinite;
+    animation-timing-function: linear; 
+}

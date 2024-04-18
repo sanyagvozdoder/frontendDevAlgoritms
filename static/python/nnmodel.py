@@ -2,6 +2,7 @@ import numpy as np
 import json
 import cv2
 from scipy.ndimage import center_of_mass
+from decimal import Decimal
 
 file = open('static\\res\\weightsandbiases.txt','r')
 
@@ -51,13 +52,13 @@ async def get_data(data):
     while np.sum(pic2d[:, -1]) == 0:
         pic2d = np.delete(pic2d, -1, 1)
 
-    pic2d = cv2.resize(pic2d, (30, 30), interpolation=cv2.INTER_LINEAR) / 255.0
+    pic2d = cv2.resize(pic2d, (36, 36), interpolation=cv2.INTER_AREA) / 255.0
 
     picToSet = [[0.0] * 50 for _ in range(50)]
 
-    for i in range(10, 40):
-        for j in range(10, 40):
-            picToSet[i][j] = pic2d[i - 10][j - 10]
+    for i in range(7, 43):
+        for j in range(7, 43):
+            picToSet[i][j] = pic2d[i - 7][j - 7]
 
 
     shiftx, shifty = getBestShift(np.array(picToSet))
@@ -126,15 +127,26 @@ class NeuralNetwork:
     def answer(self,inputs):
         self.forwardPropagation(inputs)
 
-        index = 0
-        maxi = 0.0
+        indexes = [0,0,0]
+        maxis = [0,0,0]
 
         for i in range(self.outputSize):
-            if maxi<self.outputLayer.output[0][i]:
-                maxi = self.outputLayer.output[0][i]
-                index = i
+            if maxis[0]<float(format(self.outputLayer.output[0][i]*100, '.2f')):
+                maxis[0] = float(format(self.outputLayer.output[0][i]*100, '.2f'))
+                indexes[0] = i
+            elif maxis[1]<float(format(self.outputLayer.output[0][i]*100, '.2f')):
+                maxis[1] = float(format(self.outputLayer.output[0][i]*100, '.2f'))
+                indexes[1] = i
+            elif maxis[2]<float(format(self.outputLayer.output[0][i]*100, '.2f')):
+                maxis[2] = float(format(self.outputLayer.output[0][i]*100, '.2f'))
+                indexes[2] = i
 
-        return index
+        ans = {
+            "digits":indexes,
+            "percent":maxis
+        }
+
+        return ans
 
 nn = NeuralNetwork(2500, 1250, 10)
 
@@ -142,7 +154,7 @@ nn = NeuralNetwork(2500, 1250, 10)
 def get_answer():
     global pic
     
-    return str(nn.answer(pic))
+    return nn.answer(pic)
 
     pic = []
 
