@@ -2,13 +2,13 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 
-let iterations;
 let cities = [];
 let pheromones = [];
 let ants = [];
-let showAnts = true;
+let bestTour = [];
 let stopped = false;
 let placingAnts = true;
+let cleared = false;
 
 let numAnts;
 const alpha = 1;
@@ -17,6 +17,34 @@ const evaporationRate = 0.1;
 const Q = 1;
 let maxIterations;
 let animating = false;
+
+let labeltime = document.getElementById("timeoutlabel")
+let speeed = document.getElementById("speed")
+labeltime.textContent = speeed.value
+
+speeed.addEventListener("input", (event) => {
+    labeltime.textContent = event.target.value
+})
+
+let labelant = document.getElementById("antlabel")
+let antsize = document.getElementById("antAmount")
+labelant.textContent = antsize.value
+
+antsize.addEventListener("input", (event) => {
+    labelant.textContent = event.target.value
+})
+
+
+let labeliter = document.getElementById("iterationslabel")
+let iteram = document.getElementById("iterationsAmount")
+labeliter.textContent = iteram.value
+
+iteram.addEventListener("input", (event) => {
+    labeliter.textContent = event.target.value
+    if (!animating) {
+        maxIterations = parseInt(iteram.value);
+    }
+})
 
 canvas.addEventListener('click', function (event) {
     if (placingAnts) {
@@ -83,9 +111,21 @@ function stopStart() {
         stopped = true;
     }
 }
+
 function calculateDistance(city1, city2) {
     return Math.sqrt(Math.pow(city1.x - city2.x, 2) + Math.pow(city1.y - city2.y, 2));
 }
+
+
+function calculateDistanceBetweenCities(tour) {
+    let distance = 0;
+    for (let i = 0; i < tour.length - 1; i++) {
+        distance += calculateDistance(cities[tour[i]], cities[tour[i + 1]]);
+    }
+    distance += calculateDistance(cities[tour[tour.length - 1]], cities[tour[0]]);
+    return distance;
+}
+
 
 
 function updatePheromones() {
@@ -140,20 +180,44 @@ function draw() {
         ctx.fill();
     });
 
-    if (showAnts) {
-        ctx.strokeStyle = 'green';
-        ants.forEach(ant => {
-            ctx.beginPath();
-            ant.tour.forEach(cityIndex => {
-                const city = cities[cityIndex];
-                ctx.lineTo(city.x, city.y);
-            });
-            ctx.stroke();
-        });
 
-        updatePheromones();
-    }
+
+    ctx.strokeStyle = 'green';
+    ants.forEach(ant => {
+        ctx.beginPath();
+        ant.tour.forEach(cityIndex => {
+            const city = cities[cityIndex];
+            ctx.lineTo(city.x, city.y);
+        });
+        ctx.stroke();
+    });
+    updatePheromones();
 }
+
+function drawBest() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = 'green';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    bestTour.forEach((cityIndex) => {
+        const city = cities[cityIndex];
+        ctx.lineTo(city.x, city.y);
+    });
+    ctx.closePath();
+    ctx.stroke();
+
+
+    ctx.fillStyle = 'red';
+    cities.forEach((city) => {
+        ctx.beginPath();
+        ctx.arc(city.x, city.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+}
+
 
 async function antColonyOptimization() {
 
@@ -171,18 +235,18 @@ async function antColonyOptimization() {
         placingAnts = false;
         resetData();
     }
-    maxIterations = parseInt(document.getElementById("iterationsAmount").value)
     animating = true;
-    iterations = 0;
+    bestTour = [];
 
-    while (true) {
+    maxIterations = parseInt(iteram.value);
+
+    for (let i = 0; i < maxIterations; i++) {
 
         if (stopped) {
             document.getElementById("stop").innerText = "Продолжить";
             let state = await waitState();
         }
         document.getElementById("stop").innerText = "Приостановить";
-        iterations++;
         ants.forEach((ant, index) => {
             if (ant.tour.length <= cities.length) {
                 chooseNextCity(index);
@@ -196,31 +260,42 @@ async function antColonyOptimization() {
                 };
             }
         });
-        if (iterations == maxIterations) {
-            placingAnts = true;
-            animating = false;
-            ctx.strokeStyle = 'green';
-            ants.forEach(ant => {
-                ctx.beginPath();
-                ant.tour.forEach(cityIndex => {
-                    const city = cities[cityIndex];
-                    ctx.lineTo(city.x, city.y);
-                });
-                ctx.stroke();
-            });
-            return;
+
+
+        if (!bestTour.length || ants[0].tourLength < calculateDistanceBetweenCities(bestTour)) {
+            if (ants[0].tour.length == cities.length + 1)
+                bestTour = ants[0].tour;
+        }
+
+        if (cleared) {
+            cleared = false;
+            break;
         }
 
         draw();
         await new Promise(resolve => setTimeout(resolve, parseInt(document.getElementById("speed").value)));
     }
+    drawBest();
+    maxIterations = parseInt(iteram.value);
+    placingAnts = true;
+    animating = false;
+    stopped = false;
+
 }
 
 function clear() {
+    if (!cleared) {
+        cleared = true;
+    }
+    if (cleared) {
+        cleared = false;
+    }
+    maxIterations = parseInt(iteram.value);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ants = [];
     pheromones = [];
     cities = [];
+    bestTour = [];
     stopped = false;
     placingAnts = true;
     animating = false;

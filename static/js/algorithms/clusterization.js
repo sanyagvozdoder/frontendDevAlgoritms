@@ -104,16 +104,14 @@ function kMeanClusterization(points, amount) {
 function kMeanClusterizationOnCanvas(points, context) {
 
     let size = parseInt(document.getElementById("clustersAmount").value);
-    if (size >  points.length)
-    {
+    if (size > points.length) {
         alert(`Вы поствили меньше ${size} точек`);
         return;
     }
     let color;
     let clusters = kMeanClusterization(points, size);
 
-    for (let i = 0; i < size; i++)
-    {
+    for (let i = 0; i < size; i++) {
         color = generateRandomHexColor();
         for (let j = 0; j < clusters[i].length; j++) {
             context.fillStyle = color;
@@ -149,8 +147,7 @@ function hierarchicalClusterization(points, amount) {
 
 function hierarchicalClusterizationOnCanvas(points, context) {
     let size = parseInt(document.getElementById("clustersAmount").value);
-    if (size >  points.length)
-    {
+    if (size > points.length) {
         alert(`Вы поствили меньше ${size} точек`)
         return;
     }
@@ -158,8 +155,7 @@ function hierarchicalClusterizationOnCanvas(points, context) {
     let color;
     let clusters = hierarchicalClusterization(points, size);
 
-    for (let i = 0; i < size; i++)
-    {
+    for (let i = 0; i < size; i++) {
         color = generateRandomHexColor();
         for (let j = 0; j < clusters[i].length; j++) {
             context.fillStyle = color;
@@ -183,7 +179,7 @@ function chooseMedoids(points, amount) {
 function kMedoidsClusterization(points, amount) {
     let medoids = chooseMedoids(points, amount)
     let clusters = [];
-    
+
 
     for (let i = 0; i < amount; ++i) {
         clusters.push([])
@@ -238,8 +234,7 @@ function kMedoidsClusterizationOnCanvas(points, context) {
 
     let size = parseInt(document.getElementById("clustersAmount").value);
 
-    if (size >  points.length)
-    {
+    if (size > points.length) {
         alert(`Вы поствили меньше ${size} точек`)
         return;
     }
@@ -247,8 +242,7 @@ function kMedoidsClusterizationOnCanvas(points, context) {
     let clusters = kMedoidsClusterization(points, size);
 
 
-    for (let i = 0; i < size; i++)
-    {
+    for (let i = 0; i < size; i++) {
         color = generateRandomHexColor();
         for (let j = 0; j < clusters[i].length; j++) {
             context.fillStyle = color;

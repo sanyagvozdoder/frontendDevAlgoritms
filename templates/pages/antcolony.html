@@ -21,15 +21,15 @@
 {% block controls %}
 <span class="block-title">Настройка</span>
 <div class="named-input">
-    <span class="input-title">Задержка:</span>
+    <span class="input-title">Задержка: (<output id= "timeoutlabel"></output>)</span>
     <input id="speed" type="range" step="10" list="volsettings" max="200" value="100" min="0">
 </div>
 <div class="named-input mt">
-    <span class="input-title">Муравьёв:</span>
+    <span class="input-title">Муравьёв: (<output id="antlabel"></output>)</span>
     <input id="antAmount" type="range" step="1" list="volsettings" max="100" value="25" min="1">
 </div>
 <div class="named-input mt">
-    <span class="input-title">Итераций:</span>
+    <span class="input-title">Итераций: (<output id="iterationslabel"></output>)</span>
     <input id="iterationsAmount" type="range" step="100" list="volsettings" max="10000" value="1000" min="100">
 </div>
 <hr>
