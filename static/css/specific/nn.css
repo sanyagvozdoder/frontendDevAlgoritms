@@ -59,7 +59,7 @@
 .load {
 	width: 100px;
 	height: 100px;
-	margin: 20% auto;
+	margin: 0 auto;
 	border:solid 10px #391ac4;
 	border-radius: 50%;
 	border-right-color: transparent;
