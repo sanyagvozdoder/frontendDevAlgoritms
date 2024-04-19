@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/specific/gen.css') }}">
 {% endblock %}
 {% block extra_scripts %}
-<script  type="module" src="{{ url_for('static', filename='js/algorithms/gen.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/algorithms/gen.js') }}"></script>
 {% endblock %}
 
 {% block visualization %}
@@ -24,7 +24,7 @@
             <input type="range" id="mutationrate" name="mutationrate" min="0" max="1" value="0.5" step="0.01" />
             <span class="input-title">(<output id="mutationlabel"></output>)</span>
         </div>
-        
+
     </div>
     <div class="mt">
         <label for="gensize" class="input-title">Размер поколения:</label>
@@ -64,10 +64,8 @@
 {% endblock %}
 
 {% block info %}
-<div class="constantsAlgoritm">
-</div>
+На данной странице реализован генетический алгоритм, решающий задачу о коммивояжёре. В поле настройка вы можете поменять
+параметры внутри алгоритма. Самые интересные данные о ходе работы программы и входных данных вы можете посмотреть в
+разделе состояния. В самом низу расположены три кнопки, жёлтая меняет свой функцию в зависимости от состояния работы
+программы. Чтобы начать, начните расставлять вершины на канвасе, ребра программа дорисует за вас.
 {% endblock %}
-
-
-
-

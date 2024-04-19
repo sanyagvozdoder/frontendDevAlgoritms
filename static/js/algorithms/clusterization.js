@@ -256,4 +256,4 @@ document.getElementById("kMeansActivate").addEventListener('click', () => { kMea
 document.getElementById("hierarchicalActivate").addEventListener('click', () => { hierarchicalClusterizationOnCanvas(points, context) });
 document.getElementById("kMedoidsActivate").addEventListener('click', () => { kMedoidsClusterizationOnCanvas(points, context) });
 
-document.getElementById("goslingCSS").addEventListener('click', () => { clear(context) });
+document.getElementById("clear").addEventListener('click', () => { clear(context) });

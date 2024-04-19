@@ -261,16 +261,16 @@ async function antColonyOptimization() {
             }
         });
 
+        if (cleared) {
+            cleared = false;
+            break;
+        }
 
         if (!bestTour.length || ants[0].tourLength < calculateDistanceBetweenCities(bestTour)) {
             if (ants[0].tour.length == cities.length + 1)
                 bestTour = ants[0].tour;
         }
 
-        if (cleared) {
-            cleared = false;
-            break;
-        }
 
         draw();
         await new Promise(resolve => setTimeout(resolve, parseInt(document.getElementById("speed").value)));
@@ -302,6 +302,6 @@ function clear() {
 }
 
 
-document.getElementById("goslingCSS").addEventListener('click', () => { antColonyOptimization() });
+document.getElementById("activateColony").addEventListener('click', () => { antColonyOptimization() });
 document.getElementById("stop").addEventListener('click', () => { stopStart() });
 document.getElementById("clear").addEventListener('click', () => { clear() });
